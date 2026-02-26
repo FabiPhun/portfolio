@@ -49,6 +49,8 @@
 
         if (navbarContainer.children.length > 0) {
             if (callback) callback();
+            // Add this: ensure padding is set even if navbar already exists
+            setTimeout(adjustBodyContentPadding, 50);
             return;
         }
 
@@ -82,6 +84,8 @@
                 }
                 
                 if (callback) callback();
+                // Add this: ensure padding is set after HTML is injected
+                setTimeout(adjustBodyContentPadding, 100);
             })
             .catch(error => {
                 console.error('Fetch failed:', error);
@@ -107,6 +111,8 @@
                     elements.desktopNav.appendChild(content);
                 }
             }
+            // Still adjust padding for desktop if needed
+            setTimeout(adjustBodyContentPadding, 50);
             return;
         }
 
@@ -133,20 +139,27 @@
             mobileNavbarFunctionality(elements.menuToggle, elements.mobileMenu);
         }
 
-        adjustBodyContentPadding();
+        // Call padding adjustment multiple times to ensure it works
+        setTimeout(adjustBodyContentPadding, 0);  // Immediate after sync code
+        setTimeout(adjustBodyContentPadding, 50); // After potential reflows
+        setTimeout(adjustBodyContentPadding, 150); // After everything is settled
+        
         window.addEventListener('resize', adjustBodyContentPadding);
+        // Also listen for orientation changes on mobile
+        window.addEventListener('orientationchange', adjustBodyContentPadding);
         
         //-----------!! LINK HANDLER HIER EINGEFÜGT !!-----------//
         setupNavLinks();
     }
 
-//-----------!! LINK HANDLER FUNKTION !!-----------//
+    //-----------!! LINK HANDLER FUNKTION !!-----------//
     function setupNavLinks() {
         document.querySelectorAll('.nav-link-main, .nav-link-sub').forEach(link => {
             link.removeEventListener('click', navLinkHandler);
             link.addEventListener('click', navLinkHandler);
         });
     }
+    
     function navLinkHandler(e) {
         e.preventDefault();
         
@@ -186,7 +199,7 @@
         checkFile(currentDir + targetFile);
     }
 
-//-----------!! mobile stuff !!-----------//
+    //-----------!! mobile stuff !!-----------//
 
     // create the overlay that darkens the bg when mobile navbar is opened
     function createOverlay() {
@@ -291,8 +304,39 @@
         });
     }
 
+    // NEW FUNCTION: Watch for navbar changes
+    function watchForNavbarChanges() {
+        const navbarContainer = document.getElementById('navbar-container');
+        if (!navbarContainer) return;
+        
+        const observer = new MutationObserver(function(mutations) {
+            // Check if the navbar height might have changed
+            adjustBodyContentPadding();
+        });
+        
+        observer.observe(navbarContainer, { 
+            childList: true, 
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['style', 'class']
+        });
+        
+        // Also observe the navbar elements directly
+        const mobileNav = document.querySelector('.mobile-nav-container');
+        if (mobileNav) {
+            observer.observe(mobileNav, {
+                attributes: true,
+                attributeFilter: ['style', 'class']
+            });
+        }
+    }
+
+    // UPDATED DOMContentLoaded event listener
     document.addEventListener('DOMContentLoaded', function() {
         loadNavbarCSS();
-        loadNavbarHTML(initNavigation);
+        loadNavbarHTML(function() {
+            initNavigation();
+            watchForNavbarChanges(); // Add this line
+        });
     });
 })();
