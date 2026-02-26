@@ -1,0 +1,34 @@
+<!-- mobile menu -->
+<div class="mobile-nav-container" id="mobileNav">
+    <div class="mobile-nav-header">
+        <button class="mobile-nav-toggle" id="menuToggle" aria-label="Menü öffnen">
+            <div class="hamburger-icon">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+        </button>
+    </div>
+</div>
+<nav class="mobile-nav-menu" id="mobileMenu"></nav>
+
+<!-- desktop navbar -->
+<nav class="main-nav" id="desktopNav"></nav>
+
+<!------------------------------------------------------------------------------------------------------------------------>
+
+<!-- navbar content -->
+<template id="navContentTemplate">
+    <div class="nav-content">
+        <!-- main menu -->
+        <ul class="nav-section main-section">
+            <li><a href="/home.html" class="nav-link-main">HOME</a></li>
+        </ul>
+
+        <!-- static categories & pagelink -->
+        <ul class="nav-section">
+            <li><span class="nav-category">category</span></li>
+            <li><a href="/" class="nav-link-sub">link</a></li>
+        </ul>
+    </div>
+</template>

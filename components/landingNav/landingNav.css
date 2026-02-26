@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'Moresugar';
+  src: url('../../fonts/669b80f005a7329202d9b01d_MoreSugar-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Chewy';
+  src: url('../../fonts/669b82036de75eb9da78490b_Chewy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --text-hover: white;
+  --primary: #474c81;
+  --primary-hover: #98a1bc;
+  --navbar-font: 'Moresugar', sans-serif;
+  --logo-font: 'Chewy', sans-serif;
+  --navbar-font-size: 2vh;
+  --logo-font-size: 2vh;
+  --logo-subtitle-size: 1.5vh;
+}
+
+.landing-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.landing-nav-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-nav-item {
+  color: var(--primary);
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0 2vh;
+  font-family: var(--navbar-font);
+  font-size: var(--navbar-font-size);
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1;
+  display: block;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.landing-nav-item:hover {
+  color: var(--primary-hover);
+}
+
+.landing-nav-item[current] {
+  background-color: var(--primary);
+  color: var(--text-hover);
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+}
+
+@media screen and (max-width: 991px) {
+  .landing-nav-list {
+    display: none;
+  }
+}
