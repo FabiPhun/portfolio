@@ -1,41 +1,13 @@
 //-----------!! setup !!-----------//
 
 (function() {
-    // Finde heraus wo navbar.js geladen wurde
-    const scripts = document.getElementsByTagName('script');
-    let navbarScriptPath = '';
-    
-    for (let i = 0; i < scripts.length; i++) {
-        if (scripts[i].src.includes('navbar.js')) {
-            navbarScriptPath = scripts[i].src;
-            break;
-        }
-    }
-    
-    console.log('RAW navbar.js path:', navbarScriptPath);
-    
-    // BEREINIGE DEN PFAD KORREKT
-    // 1. Entferne mehrfache Slashes (/// -> /)
-    navbarScriptPath = navbarScriptPath.replace(/\/\/+/g, '/');
-    // 2. Stelle sicher, dass file:/// korrekt ist (3 Slashes nach file:)
-    navbarScriptPath = navbarScriptPath.replace('file:/', 'file:///');
-    
-    console.log('CLEANED navbar.js path:', navbarScriptPath);
-    
-    // Extrahiere das Verzeichnis von navbar.js
-    const navbarDir = navbarScriptPath.substring(0, navbarScriptPath.lastIndexOf('/') + 1);
-    console.log('navbar Verzeichnis:', navbarDir);
-    
+    //fetch html and css
     function loadNavbarCSS() {
         if (!document.querySelector('link[href*="navbar.css"]')) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            
-            // navbar.css ist im gleichen Verzeichnis wie navbar.js
-            link.href = navbarDir + 'navbar.css';
-            
+            link.href = '../components/navbar/navbar.css';
             document.head.appendChild(link);
-            console.log('CSS geladen von:', link.href);
         }
     }
     
@@ -52,14 +24,9 @@
             return;
         }
 
-        // navbar.html ist im gleichen Verzeichnis wie navbar.js
-        const navbarPath = navbarDir + 'navbar.html';
-        console.log('Fetch HTML von:', navbarPath);
-
-        fetch(navbarPath)
+        fetch('../components/navbar/navbar.html')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.text();
             })
@@ -84,11 +51,9 @@
                 if (callback) callback();
             })
             .catch(error => {
-                console.error('Fetch failed:', error);
             });
     }
 
- 
     //replace placeholder by fetched html
     function initNavigation() {       
         const elements = {
