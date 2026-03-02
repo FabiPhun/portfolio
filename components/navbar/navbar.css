@@ -4,90 +4,94 @@
 @import url('/');
 
 :root {
-/* ===== TYPOGRAPHY NAVBAR ===== */
-
-/* === Global Typography Defaults === */
+    /* ===== TYPOGRAPHY BASE ===== */
     --font-primary: "Calibri", sans-serif;
     --fontsize-base-desktop: 16px;
     --fontsize-base-mobile: 2svh;
 
-    /* === Main Link Text  === */
-    --color-mainlink: white;
-    --color-mainlink-hover: #bdbdbd;
+
+    /* ===== COLORS ===== */
+    --nav-bg: #191a22;
+    --mobile-header-bg: #474c81;
+    --color-overlay: rgba(0, 0, 0, 0.5);
     
+
+    /* ===== MAIN LINK STYLES ===== */
     --font-mainlink: ;
+    --color-mainlink: white;
+    --color-mainlink-hover: #ffffff;
+    
     --fontsize-mainlink-desktop: 25px;
-    --fontsize-mainlink-mobile: 3svh;
-    /*-------------------------------------*/
+    --lineheight-mainlink-desktop: 1;
     --padding-mainlink-desktop: 0;
+    --margin-mainlink-desktop: 0 0 0 0;
+    
+    --fontsize-mainlink-mobile: 3svh;
+    --lineheight-mainlink-mobile: 1;
     --padding-mainlink-mobile: 0;
+    --margin-mainlink-mobile: 0 0 1svh 0;
 
-    --margin-mainlink-desktop: 0;
-    --margin-mainlink-mobile: 0;
 
-    /* === Category Text === */
-    --color-category: #d3d3d3;
-    
+    /* ===== CATEGORY STYLES ===== */
     --font-category: ;
-    --fontsize-category-desktop: 18px;
-    --fontsize-category-mobile: 2.2svh;
-    /*-------------------------------------*/
-    --padding-category-desktop: 0;
-    --padding-category-mobile: 0;
-
-    --margin-category-desktop: 0 0 0 0;
-    --margin-category-mobile: 0 0 0 0;
-
-
-    /* === Sub Link Text === */
-    --color-sublink: #929292;
-    --color-sublink-hover: white;
+    --color-category: #7292dd;
     
+    --fontsize-category-desktop: 18px;
+    --lineheight-category-desktop: 1.2;
+    --padding-category-desktop: 0;
+    --margin-category-desktop: 0 0 0 0;
+    
+    --fontsize-category-mobile: 2.2svh;
+    --lineheight-category-mobile: 1.2;
+    --padding-category-mobile: 0;
+    --margin-category-mobile: 0 0 2svh 0;
+
+
+    /* ===== SUBLINK STYLES ===== */
     --font-sublink: ;
+    --color-sublink: #778196;
+    --color-sublink-hover: #ffffff;
+    
     --fontsize-sublink-desktop: 18px;
-    --fontsize-sublink-mobile: 2.2svh;
-    /*-------------------------------------*/
+    --lineheight-sublink-desktop: 1;
     --padding-sublink-desktop: 0 0 0 10px;
-    --padding-sublink-mobile: 0 0 0 1svh;
-
     --margin-sublink-desktop: 0 0 0 0;
-    --margin-sublink-mobile: 0 0 0 0;
+    
+    --fontsize-sublink-mobile: 2.2svh;
+    --lineheight-sublink-mobile: 1;
+    --padding-sublink-mobile: 0 0 0 1svh;
+    --margin-sublink-mobile: 0 0 0.5svh 0;
 
 
-/* !!-------------------------------------- navbar settings --------------------------------------!! */
+    /* ===== NAV-SECTION STYLES (DIV WRAPPER) ===== */
+    --padding-section-desktop: 0;
+    --margin-section-desktop: 0 0 0 0;
+    --gap-section-desktop: 0;
+    
+    --padding-section-mobile: 0;
+    --margin-section-mobile: 0 0 4svh 0;
+    --gap-section-mobile: 0;
 
-/* ===== COLOURS NAVBAR ===== */
-    --nav-bg: #202020;
-    --mobile-header-bg: #707070;
 
-/* ===== DESKTOP ===== */
+    /* ===== NAVBAR LAYOUT ===== */
     --width-nav-desktop: 300px;
     --padding-nav-desktop: 60px 30px;
-    --gap-content-desktop: 0;
-    --gap-section-desktop: 0;
-    --padding-content-right-desktop: 5px;
-    --margin-content-right-desktop: -5px;
-    --margin-section-desktop: 0;
-    --margin-main-section-desktop: 0;
-
-/* ===== MOBILE ===== */
+    --gap-sections-desktop: 10px;
+    
     --width-nav-mobile: 32vh;
     --padding-nav-mobile: 5vh 5vh 0;
-    --gap-content-mobile: 0;
-    --gap-section-mobile: 0;
-    --margin-section-mobile: 0;
-    --margin-main-section-mobile: 0;
+    --gap-sections-mobile: 0;
+
+
+    /* ===== ANIMATIONS ===== */
     --transition-speed: 0.2s;
     --transition-menu: 0.3s ease;
-
-    /* overlay behind mobile nav */
-    --color-overlay: rgba(0, 0, 0, 0.5);
-    --blur-overlay: 3px;
 }
 
-/* !!-------------------------------------- advanced settings..---------------------------------------!! */
 
-/* ===== DESKTOP STYLES ===== */
+/* !!-------------------------------------- ADVANCED SETTING ---------------------------------------!! */
+
+/* !!--------------------------------------DESKTOP STYLES---------------------------------------!! */
 .main-nav {
     background-color: var(--nav-bg);
     width: var(--width-nav-desktop);
@@ -97,89 +101,81 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    overflow: hidden;
     font-family: var(--font-primary);
     font-size: var(--fontsize-base-desktop);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .main-nav .nav-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-content-desktop);
+    gap: var(--gap-sections-desktop);
     flex: 1;
-    overflow-y: hiddens;
-    padding-right: var(--padding-content-right-desktop);
-    margin-right: var(--margin-content-right-desktop);
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
-
-/* section */
 .main-nav .nav-section {
     display: flex;
     flex-direction: column;
     gap: var(--gap-section-desktop);
+    padding: var(--padding-section-desktop);
     margin: var(--margin-section-desktop);
-    list-style: none;
-    padding: 0;
-    flex-shrink: 0;
-}
-.main-nav .main-section {
-    margin: var(--margin-main-section-desktop);
 }
 
-/* category */
+/* Category */
 .main-nav .nav-category {
     color: var(--color-category);
-    padding: var(--padding-category-desktop);
-    margin: var(--margin-category-desktop);
     font-size: var(--fontsize-category-desktop);
     font-family: var(--font-category);
+    line-height: var(--lineheight-category-desktop);
+    padding: var(--padding-category-desktop);
+    margin: var(--margin-category-desktop);
     display: block;
-    flex-shrink: 0;
 }
 
-/* main */
+/* Main link */
 .main-nav .nav-link-main {
     color: var(--color-mainlink);
-    padding: var(--padding-mainlink-desktop);
-    margin: var(--margin-mainlink-desktop);
     font-size: var(--fontsize-mainlink-desktop);
     font-family: var(--font-mainlink);
+    line-height: var(--lineheight-mainlink-desktop);
+    padding: var(--padding-mainlink-desktop);
+    margin: var(--margin-mainlink-desktop);
+    text-decoration: none;
     transition: color var(--transition-speed);
     display: block;
-    flex-shrink: 0;
-    text-decoration: none;
 }
+
 .main-nav .nav-link-main:hover {
     color: var(--color-mainlink-hover);
 }
 
-/* sublinks */
+/* Sub link */
 .main-nav .nav-link-sub {
     color: var(--color-sublink);
-    padding: var(--padding-sublink-desktop);
-    margin: var(--margin-sublink-desktop);
     font-size: var(--fontsize-sublink-desktop);
     font-family: var(--font-sublink);
+    line-height: var(--lineheight-sublink-desktop);
+    padding: var(--padding-sublink-desktop);
+    margin: var(--margin-sublink-desktop);
+    text-decoration: none;
     transition: color var(--transition-speed);
     display: block;
-    flex-shrink: 0;
-    text-decoration: none;
 }
+
 .main-nav .nav-link-sub:hover {
     color: var(--color-sublink-hover);
 }
+
 .main-nav .nav-link-sub.active {
     color: var(--color-sublink);
 }
 
-
-
-/* ===== MOBILE STYLES ===== */
+/* !!--------------------------------------MOBILE STYLES---------------------------------------!! */
 .mobile-nav-container {
     display: none;
     background-color: var(--mobile-header-bg);
@@ -191,6 +187,7 @@
     z-index: 1002;
     pointer-events: none;
 }
+
 .mobile-nav-header {
     display: flex;
     justify-content: space-between;
@@ -198,6 +195,7 @@
     width: 100%;
     pointer-events: auto;
 }
+
 .mobile-nav-toggle {
     padding: 10px;
     background: none;
@@ -209,18 +207,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-tap-highlight-color: rgba(255,255,255,0.2);
 }
-@media (hover: hover) {
-    .mobile-nav-toggle:hover {
-        opacity: 0.8;
-    }
-}
+
 .hamburger-icon {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
+
 .hamburger-line {
     width: 30px;
     height: 3px;
@@ -228,6 +222,7 @@
     border-radius: 3px;
     transition: transform var(--transition-speed), opacity var(--transition-speed);
 }
+
 .mobile-nav-menu {
     position: fixed;
     top: 0;
@@ -237,83 +232,84 @@
     background-color: var(--nav-bg);
     transform: translateX(-100%);
     transition: transform var(--transition-menu);
-    overflow-y: hidden;
+    overflow-y: auto;
     z-index: 1003;
     pointer-events: auto;
     box-shadow: 2px 0 10px rgba(0,0,0,0.3);
 }
+
 .mobile-nav-menu.active {
     transform: translateX(0);
 }
+
 .mobile-nav-menu .nav-content {
     padding: var(--padding-nav-mobile);
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-content-mobile);
+    gap: var(--gap-sections-mobile);
     font-family: var(--font-primary);
     font-size: var(--fontsize-base-mobile);
 }
 
-/* sections */
 .mobile-nav-menu .nav-section {
     display: flex;
     flex-direction: column;
     gap: var(--gap-section-mobile);
+    padding: var(--padding-section-mobile);
     margin: var(--margin-section-mobile);
-    list-style: none;
-    padding: 0;
-}
-.mobile-nav-menu .main-section {
-    margin: var(--margin-main-section-mobile);
 }
 
-/* category */
+/* Mobile category */
 .mobile-nav-menu .nav-category {
     color: var(--color-category);
-    padding: var(--padding-category-mobile);
-    margin: var(--margin-category-mobile);
     font-size: var(--fontsize-category-mobile);
     font-family: var(--font-category);
+    line-height: var(--lineheight-category-mobile);
+    padding: var(--padding-category-mobile);
+    margin: var(--margin-category-mobile);
     display: block;
 }
 
-/* main */
+/* Mobile main link */
 .mobile-nav-menu .nav-link-main {
     color: var(--color-mainlink);
-    padding: var(--padding-mainlink-mobile);
-    margin: var(--margin-mainlink-mobile);
     font-size: var(--fontsize-mainlink-mobile);
     font-family: var(--font-mainlink);
+    line-height: var(--lineheight-mainlink-mobile);
+    padding: var(--padding-mainlink-mobile);
+    margin: var(--margin-mainlink-mobile);
+    text-decoration: none;
     transition: color var(--transition-speed);
     display: block;
-    text-decoration: none;
 }
+
 .mobile-nav-menu .nav-link-main:hover {
     color: var(--color-mainlink-hover);
 }
 
-/* sublinks */
+/* Mobile sub link */
 .mobile-nav-menu .nav-link-sub {
     color: var(--color-sublink);
-    padding: var(--padding-sublink-mobile);
-    margin: var(--margin-sublink-mobile);
     font-size: var(--fontsize-sublink-mobile);
     font-family: var(--font-sublink);
+    line-height: var(--lineheight-sublink-mobile);
+    padding: var(--padding-sublink-mobile);
+    margin: var(--margin-sublink-mobile);
+    text-decoration: none;
     transition: color var(--transition-speed);
     display: block;
-    text-decoration: none;
 }
+
 .mobile-nav-menu .nav-link-sub:hover {
     color: var(--color-sublink-hover);
 }
+
 .mobile-nav-menu .nav-link-sub.active {
     color: var(--color-sublink);
 }
 
-
-
-/* ===== OVERLAY STYLES ===== */
+/* !!--------------------------------------OVERLAY---------------------------------------!! */
 .mobile-nav-overlay {
     position: fixed;
     top: 0;
@@ -321,38 +317,33 @@
     right: 0;
     bottom: 0;
     background-color: var(--color-overlay);
+    backdrop-filter: blur(3px);
     z-index: 1002;
-    
-    /* Fade Animation */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
 .mobile-nav-overlay.active {
     opacity: 1;
     visibility: visible;
-}
-.mobile-nav-overlay.active {
-    display: block;
-    opacity: 1;
     pointer-events: auto;
 }
+
 body.menu-open {
     overflow: hidden;
 }
 
-
-
-/* ===== RESPONSIVE ===== */
+/* !!--------------------------------------RESPONSIVE---------------------------------------!! */
 @media screen and (max-width: 991px) {
     .main-nav {
         display: none;
     }
-
     .mobile-nav-container {
         display: block;
     }
 }
+
 @media screen and (max-width: 479px) {
     .mobile-nav-menu {
         width: 100%;
@@ -360,7 +351,7 @@ body.menu-open {
     }
 }
 
-/* ===== HOVER EFFECTS ===== */
+/* !!--------------------------------------HOVER EFFECTS---------------------------------------!! */
 @media (hover: hover) {
     .main-nav .nav-link-main:hover,
     .mobile-nav-menu .nav-link-main:hover {
@@ -372,5 +363,9 @@ body.menu-open {
     .mobile-nav-menu .nav-link-sub:hover {
         letter-spacing: 0.2px;
         transition: letter-spacing var(--transition-speed);
+    }
+    
+    .mobile-nav-toggle:hover {
+        opacity: 0.8;
     }
 }

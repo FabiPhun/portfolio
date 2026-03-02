@@ -1,34 +1,19 @@
 //-----------!! setup !!-----------//
 
 (function() {
-    const scripts = document.getElementsByTagName('script');
-    let navbarScriptPath = '';
-
-    for (let i = 0; i < scripts.length; i++) {
-        if (scripts[i].src && scripts[i].src.includes('navbar.js')) {
-            navbarScriptPath = scripts[i].src;
-            break;
-        }
-    }
-    if (!navbarScriptPath) {
-        console.error('couldnt find navbar.js');
-        return;
-    }
-
-    const navbarDir = navbarScriptPath.substring(0, navbarScriptPath.lastIndexOf('/') + 1);
-
+    //fetch html and css
     function loadNavbarCSS() {
         if (!document.querySelector('link[href*="navbar.css"]')) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = navbarDir + 'navbar.css';
+            link.href = '../components/navbar/navbar.css';
             document.head.appendChild(link);
         }
     }
-
+    
     function loadNavbarHTML(callback) {
         const navbarContainer = document.getElementById('navbar-container');
-
+        
         if (!navbarContainer) {
             console.error('<div id="navbar-container"></div> missing!');
             return;
@@ -36,44 +21,41 @@
 
         if (navbarContainer.children.length > 0) {
             if (callback) callback();
-            setTimeout(adjustBodyContentPadding, 50);
             return;
         }
 
-        fetch(navbarDir + 'navbar.html')
+        fetch('../components/navbar/navbar.html')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.text();
             })
             .then(data => {
                 navbarContainer.innerHTML = data;
-
+                
                 const showDesktop = navbarContainer.getAttribute('desktopNav') !== 'false';
                 const showMobile = navbarContainer.getAttribute('mobileNav') !== 'false';
-
+                
                 if (!showDesktop) {
                     const desktopNav = document.getElementById('desktopNav');
                     if (desktopNav) desktopNav.remove();
                 }
-
+                
                 if (!showMobile) {
                     const mobileNav = document.getElementById('mobileNav');
                     const mobileMenu = document.getElementById('mobileMenu');
                     if (mobileNav) mobileNav.remove();
                     if (mobileMenu) mobileMenu.remove();
                 }
-
+                
                 if (callback) callback();
-                setTimeout(adjustBodyContentPadding, 100);
             })
             .catch(error => {
-                console.error('Fetch failed:', error);
             });
     }
 
-    function initNavigation() {
+    //replace placeholder by fetched html
+    function initNavigation() {       
         const elements = {
             menuToggle: document.getElementById('menuToggle'),
             mobileNav: document.getElementById('mobileNav'),
@@ -83,13 +65,13 @@
         };
 
         if (!elements.mobileNav) {
+            console.log('Mobile Navigation ist deaktiviert');
             if (elements.desktopNav && elements.template) {
                 const content = elements.template.content.cloneNode(true);
                 if (elements.desktopNav.children.length === 0) {
                     elements.desktopNav.appendChild(content);
                 }
             }
-            setTimeout(adjustBodyContentPadding, 50);
             return;
         }
 
@@ -116,45 +98,62 @@
             mobileNavbarFunctionality(elements.menuToggle, elements.mobileMenu);
         }
 
-        setTimeout(adjustBodyContentPadding, 0);
-        setTimeout(adjustBodyContentPadding, 50);
-        setTimeout(adjustBodyContentPadding, 150);
-
+        adjustBodyContentPadding();
         window.addEventListener('resize', adjustBodyContentPadding);
-        window.addEventListener('orientationchange', adjustBodyContentPadding);
-
+        
+        //-----------!! LINK HANDLER HIER EINGEFÜGT !!-----------//
         setupNavLinks();
     }
 
+//-----------!! LINK HANDLER FUNKTION !!-----------//
     function setupNavLinks() {
         document.querySelectorAll('.nav-link-main, .nav-link-sub').forEach(link => {
             link.removeEventListener('click', navLinkHandler);
             link.addEventListener('click', navLinkHandler);
         });
     }
-
-    //-----------!! href link handeler !!-----------//
-
     function navLinkHandler(e) {
         e.preventDefault();
-
+        
         const targetFile = this.getAttribute('href');
+        const currentPath = window.location.pathname;
         
-        if (targetFile.startsWith('http') || targetFile.startsWith('www')) {
-            window.location.href = targetFile.startsWith('www') ? 'https://' + targetFile : targetFile;
-            return;
+        let currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+        let depth = 0;
+        let maxDepth = 10;
+        
+        function checkFile(path) {
+            fetch(path, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = path;
+                    } else {
+                        depth++;
+                        if (depth <= maxDepth) {
+                            currentDir = currentDir + '../';
+                            checkFile(currentDir + targetFile);
+                        } else {
+                            window.location.href = targetFile;
+                        }
+                    }
+                })
+                .catch(() => {
+                    depth++;
+                    if (depth <= maxDepth) {
+                        currentDir = currentDir + '../';
+                        checkFile(currentDir + targetFile);
+                    } else {
+                        window.location.href = targetFile;
+                    }
+                });
         }
-
-        const navbarContainer = document.getElementById('navbar-container');
-        let baseDir = navbarContainer?.getAttribute('directoryFix') || '';
         
-        let fullPath = baseDir + targetFile;
-        
-        window.location.href = fullPath;
+        checkFile(currentDir + targetFile);
     }
 
-    //-----------!! mobile stuff !!-----------//
+//-----------!! mobile stuff !!-----------//
 
+    // create the overlay that darkens the bg when mobile navbar is opened
     function createOverlay() {
         if (!document.querySelector('.mobile-nav-overlay')) {
             const overlay = document.createElement('div');
@@ -163,19 +162,20 @@
         }
     }
 
+    // adjust the padding between mobile navbar and body content so it looks neat :)
     function adjustBodyContentPadding() {
         if (window.innerWidth <= 991) {
             const mobileNav = document.querySelector('.mobile-nav-container');
             const bodyContent = document.querySelector('.body_content');
-
+            
             if (mobileNav && bodyContent) {
                 const navHeight = mobileNav.offsetHeight;
                 const rootStyles = getComputedStyle(document.documentElement);
                 const basePadding = rootStyles.getPropertyValue('--mobile-body-content-container-padding').trim();
-
+                
                 if (basePadding) {
                     const paddingParts = basePadding.split(' ');
-
+                    
                     let newPadding;
                     if (paddingParts.length === 3) {
                         newPadding = `calc(${navHeight}px + ${paddingParts[0]}) ${paddingParts[1]} ${paddingParts[2]} ${paddingParts[1]}`;
@@ -186,7 +186,7 @@
                     } else {
                         newPadding = `${navHeight}px ${basePadding}`;
                     }
-
+                    
                     bodyContent.style.padding = newPadding;
                 } else {
                     bodyContent.style.paddingTop = navHeight + 'px';
@@ -200,6 +200,7 @@
         }
     }
 
+    // mobile navbar functionality
     function mobileNavbarFunctionality(toggleButton, menuElement) {
         if (!toggleButton || !menuElement) {
             return;
@@ -226,7 +227,7 @@
         newToggle.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-
+            
             if (menuElement.classList.contains('active')) {
                 closeMenu();
             } else {
@@ -235,8 +236,8 @@
         });
 
         document.addEventListener('click', (e) => {
-            if (menuElement.classList.contains('active') &&
-                !menuElement.contains(e.target) &&
+            if (menuElement.classList.contains('active') && 
+                !menuElement.contains(e.target) && 
                 !newToggle.contains(e.target)) {
                 closeMenu();
             }
@@ -255,33 +256,8 @@
         });
     }
 
-    function watchForNavbarChanges() {
-        const navbarContainer = document.getElementById('navbar-container');
-        if (!navbarContainer) return;
-
-        const observer = new MutationObserver(adjustBodyContentPadding);
-
-        observer.observe(navbarContainer, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['style', 'class']
-        });
-
-        const mobileNav = document.querySelector('.mobile-nav-container');
-        if (mobileNav) {
-            observer.observe(mobileNav, {
-                attributes: true,
-                attributeFilter: ['style', 'class']
-            });
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         loadNavbarCSS();
-        loadNavbarHTML(function() {
-            initNavigation();
-            watchForNavbarChanges();
-        });
+        loadNavbarHTML(initNavigation);
     });
 })();
