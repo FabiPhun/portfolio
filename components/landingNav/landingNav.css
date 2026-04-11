@@ -1,25 +1,8 @@
-@font-face {
-  font-family: 'Moresugar';
-  src: url('../../fonts/MoreSugar-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Chewy';
-  src: url('../../fonts/Chewy-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --text-hover: white;
   --primary: #474c81;
   --primary-hover: #98a1bc;
-  --navbar-font: 'Moresugar', sans-serif;
-  --logo-font: 'Chewy', sans-serif;
+  --navbar-font: 'Quicksand', sans-serif;
   --navbar-font-size: 2vh;
   --logo-font-size: 2vh;
   --logo-subtitle-size: 1.5vh;

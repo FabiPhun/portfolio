@@ -1,204 +1,195 @@
 const GALLERY_SETTINGS = {
-  minWidth: 250,
+  minWidth: 225,
   maxColumns: 4,
-  gallerySelector: '[fc-gallery=list]',
-  galleryItemSelector: '[fc-gallery=item]',
+  gallerySelector: '.gallery_justified',
+  galleryItemSelector: '.gallery_item',
   lightboxSelector: '#custom-lightbox',
   lightboxImgSelector: '#lightbox-img',
   lightboxCounterSelector: '#lb-counter',
   lightboxPrevSelector: '#lb-prev',
   lightboxNextSelector: '#lb-next',
   galleryImageSelector: '.gallery_image',
-  css: {
-    wrapper: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '5px',
-      margin: '0 auto',
-      width: '100%'
-    },
-    item: {
-      padding: '0',
-      boxSizing: 'border-box',
-      flex: '0 1 auto'
-    },
-    image: {
-      height: '100%',
-      width: '100%',
-      display: 'block',
-      marginBottom: '0',
-      objectFit: 'cover',
-      cursor: 'pointer'
-    }
-  }
 };
 
-const applyCSSToElement = (element, cssObject) => {
-  if (!element) return;
-  Object.assign(element.style, cssObject);
-};
-
-function generateGalleryFromList() {
-  const galleryLists = document.querySelectorAll(GALLERY_SETTINGS.gallerySelector);
-  if (galleryLists.length === 0) return false;
-
-  galleryLists.forEach(galleryList => {
-    applyCSSToElement(galleryList, GALLERY_SETTINGS.css.wrapper);
-    
-    const imageSpacing = galleryList.getAttribute('image-spacing');
-    if (imageSpacing) {
-      galleryList.style.gap = imageSpacing;
+function injectStyles() {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    .gallery_justified {
+      display: flex;
+      flex-wrap: wrap;
+      margin: -5px; 
     }
-    
-    const folder = galleryList.getAttribute('folder-path') || './img';
-    const imageString = galleryList.getAttribute('images') || '';
-    if (!imageString) return;
+    .gallery_item {
+      padding: 5px; 
+      box-sizing: border-box;
+    }
+    .gallery_image {
+      height: 100%;
+      width: 100%;
+      display: block;
+      margin-bottom: 0;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  `;
+  document.head.appendChild(styleElement);
+}
 
-    const imageFiles = imageString.split(',').map(name => name.trim()).filter(Boolean);
-    
-    const itemsHtml = imageFiles.map(fileName => {
-      const imgSrc = `${folder}/${fileName}`;
-      return `
-        <div fc-gallery="item">
-          <img src="${imgSrc}" class="gallery_image" alt="${fileName}" loading="lazy">
+function injectLightboxHTML() {
+  if (document.querySelector('#custom-lightbox')) return;
+  
+  const lightboxHTML = `
+    <div id="custom-lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column;">
+        <div id="lb-counter" style="color:white; margin-bottom:15px; font-family:sans-serif; opacity:0.7; font-size: 14px; letter-spacing: 1px;"></div>
+        <div style="position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:85%;">
+            <img id="lightbox-img" src="" style="max-width:90%; max-height:100%; object-fit:contain; border-radius:2px;">
+            <button id="lb-prev" style="position:absolute; left:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer; padding:20px; transition: opacity 0.2s;">&#10094;</button>
+            <button id="lb-next" style="position:absolute; right:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer; padding:20px; transition: opacity 0.2s;">&#10095;</button>
         </div>
-      `;
-    }).join('');
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+}
 
-    galleryList.innerHTML = itemsHtml;
+function generateRandomGallery(wrapper) {
+  const maxColumns = parseInt(wrapper.getAttribute('maxImages')) || GALLERY_SETTINGS.maxColumns;
+  const imageSpacing = wrapper.getAttribute('image-spacing') || '5px';
+  const randomCount = Math.floor(Math.random() * 20) + 5;
+  
+  const galleryDiv = document.createElement('div');
+  galleryDiv.className = 'gallery_justified';
+  galleryDiv.style.gap = imageSpacing;
+  galleryDiv.style.margin = `-${imageSpacing}`;
+  galleryDiv.dataset.maxColumns = maxColumns; // Speichere maxColumns für diese Galerie
+  
+  for (let i = 0; i < randomCount; i++) {
+    const width = Math.floor(Math.random() * 600) + 400;
+    const height = Math.floor(Math.random() * 600) + 400;
     
-    const items = galleryList.querySelectorAll(GALLERY_SETTINGS.galleryItemSelector);
-    items.forEach(item => applyCSSToElement(item, GALLERY_SETTINGS.css.item));
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'gallery_item';
+    itemDiv.style.padding = imageSpacing;
+    
+    const img = document.createElement('img');
+    img.className = 'gallery_image';
+    img.src = `https://picsum.photos/${width}/${height}?random=${i}`;
+    img.alt = `random-${i}`;
+    img.setAttribute('fc-gallery', 'item');
+    
+    itemDiv.appendChild(img);
+    galleryDiv.appendChild(itemDiv);
+  }
+  
+  wrapper.innerHTML = '';
+  wrapper.appendChild(galleryDiv);
+}
+
+function generateGalleryFromWrapper(wrapper) {
+  const folderPath = wrapper.getAttribute('folder-path');
+  const imagesList = wrapper.getAttribute('images');
+  
+  if (!folderPath || !imagesList) {
+    generateRandomGallery(wrapper);
+    return;
+  }
+
+  const maxColumns = parseInt(wrapper.getAttribute('maxImages')) || GALLERY_SETTINGS.maxColumns;
+  const imageSpacing = wrapper.getAttribute('image-spacing') || '5px';
+  
+  const imageEntries = imagesList.split(',').map(name => name.trim());
+  
+  const galleryDiv = document.createElement('div');
+  galleryDiv.className = 'gallery_justified';
+  galleryDiv.style.gap = imageSpacing;
+  galleryDiv.style.margin = `-${imageSpacing}`;
+  galleryDiv.dataset.maxColumns = maxColumns; // Speichere maxColumns für diese Galerie
+  
+  imageEntries.forEach(entry => {
+    const hasBreak = entry.endsWith('*');
+    const imageName = hasBreak ? entry.slice(0, -1).trim() : entry;
+    
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'gallery_item';
+    itemDiv.style.padding = imageSpacing;
+    
+    if (hasBreak) {
+      itemDiv.setAttribute('data-force-break', 'true');
+    }
+    
+    const img = document.createElement('img');
+    img.className = 'gallery_image';
+    img.src = `${folderPath}/${imageName}`;
+    img.alt = imageName;
+    img.setAttribute('fc-gallery', 'item');
+    
+    itemDiv.appendChild(img);
+    galleryDiv.appendChild(itemDiv);
   });
   
-  return true;
+  wrapper.innerHTML = '';
+  wrapper.appendChild(galleryDiv);
 }
 
 function setGalleryLayout(container, galleryImages, gapPx) {
   if (galleryImages.length === 0) return;
   
-  const validImages = Array.from(galleryImages).filter(img => 
-    img.naturalWidth > 0 && img.naturalHeight > 0
-  );
-  
-  if (validImages.length === 0) return;
+  const containerMaxColumns = parseInt(container.dataset.maxColumns) || GALLERY_SETTINGS.maxColumns;
   
   const containerWidth = container.clientWidth;
-  const shouldStretchLastRow = container.getAttribute('row-stretch') === '1';
-  
-  const maxImagesAttr = container.getAttribute('maxImages');
-  const maxColumns = maxImagesAttr ? parseInt(maxImagesAttr, 10) : GALLERY_SETTINGS.maxColumns;
-  
-  let columns = Math.floor((containerWidth + gapPx) / (GALLERY_SETTINGS.minWidth + gapPx));
-  columns = Math.max(1, Math.min(columns, maxColumns, validImages.length));
 
-  for (let i = 0; i < validImages.length; i += columns) {
+  let columns = Math.floor((containerWidth + gapPx) / (GALLERY_SETTINGS.minWidth + gapPx));
+  columns = Math.max(columns, 1);
+  columns = Math.min(columns, containerMaxColumns);
+
+  let i = 0;
+  
+  while (i < galleryImages.length) {
+    let rowEnd = i + columns;
+    
+    for (let j = i; j < Math.min(i + columns, galleryImages.length); j++) {
+      const galleryItem = galleryImages[j].closest(GALLERY_SETTINGS.galleryItemSelector);
+      if (galleryItem && galleryItem.hasAttribute('data-force-break')) {
+        rowEnd = j + 1;
+        break;
+      }
+    }
+    
     let sumRatios = 0;
     let actualItemsInRow = 0;
-    const rowImages = [];
-    
-    for (let j = 0; j < columns; j++) {
-      if (i + j >= validImages.length) break;
-      const img = validImages[i + j];
-      sumRatios += img.naturalWidth / img.naturalHeight;
+    for (let j = i; j < rowEnd; j++) {
+      if (j >= galleryImages.length) break;
+      sumRatios += galleryImages[j].naturalWidth / galleryImages[j].naturalHeight;
       actualItemsInRow++;
-      rowImages.push(img);
     }
 
-    const isLastRow = i + columns >= validImages.length && actualItemsInRow < columns;
-    let targetSum = sumRatios;
-
-    if (isLastRow) {
-      if (shouldStretchLastRow) {
-        const totalWidth = containerWidth - ((actualItemsInRow - 1) * gapPx);
-        for (let j = 0; j < actualItemsInRow; j++) {
-          const img = rowImages[j];
-          const ratio = (img.naturalWidth / img.naturalHeight) / sumRatios;
-          const galleryItem = img.closest(GALLERY_SETTINGS.galleryItemSelector);
-          if (galleryItem) {
-            galleryItem.style.width = `${totalWidth * ratio}px`;
-          }
-        }
-        continue;
-      } else {
-        targetSum = (sumRatios / actualItemsInRow) * columns;
-      }
-    }
-
-    for (let j = 0; j < actualItemsInRow; j++) {
-      const img = rowImages[j];
-      const ratio = (img.naturalWidth / img.naturalHeight) / targetSum;
-      const galleryItem = img.closest(GALLERY_SETTINGS.galleryItemSelector);
+    for (let j = i; j < rowEnd; j++) {
+      if (j >= galleryImages.length) break;
+      const ratio = (galleryImages[j].naturalWidth / galleryImages[j].naturalHeight) / sumRatios;
+      const galleryItem = galleryImages[j].closest(GALLERY_SETTINGS.galleryItemSelector);
       if (galleryItem) {
-        galleryItem.style.width = `calc((100% - ${(columns - 1) * gapPx}px) * ${ratio})`;
+        galleryItem.style.width = `calc((100% - ${(actualItemsInRow - 1) * gapPx}px) * ${ratio})`;
       }
     }
+    
+    i = rowEnd;
   }
 }
 
-
-let resizeTimeout;
 function initLayout() {
   const galleryLists = document.querySelectorAll(GALLERY_SETTINGS.gallerySelector);
-  
   galleryLists.forEach(galleryList => {
-    applyCSSToElement(galleryList, GALLERY_SETTINGS.css.wrapper);
-    
-    const imageSpacing = galleryList.getAttribute('image-spacing');
-    if (imageSpacing) {
-      galleryList.style.gap = imageSpacing;
-    }
-    
-    let galleryImages = galleryList.querySelectorAll(GALLERY_SETTINGS.galleryImageSelector);
-    
-    const items = galleryList.querySelectorAll(GALLERY_SETTINGS.galleryItemSelector);
-    items.forEach(item => applyCSSToElement(item, GALLERY_SETTINGS.css.item));
-    
-    galleryImages.forEach(img => applyCSSToElement(img, GALLERY_SETTINGS.css.image));
-
-    const gap = getComputedStyle(galleryList).gap !== 'normal' ? getComputedStyle(galleryList).gap : '0px';
+    const galleryImages = galleryList.querySelectorAll('img');
+    const gap = getComputedStyle(galleryList).gap || '0px';
     const gapPx = parseFloat(gap);
 
-    const runLayout = () => {
-      setGalleryLayout(galleryList, galleryImages, gapPx);
-    };
+    const runLayout = () => setGalleryLayout(galleryList, galleryImages, gapPx);
 
-    const runLayoutThrottled = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(runLayout, 50);
-    };
-
-    Promise.all(Array.from(galleryImages).map(img => {
-      if (img.complete && img.naturalHeight > 0) return Promise.resolve();
-      return new Promise(resolve => { 
-        img.onload = resolve; 
-        img.onerror = resolve; 
-      });
-    })).then(runLayout);
+    Promise.all(Array.from(galleryImages).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
+      .then(runLayout);
     
-    window.removeEventListener('resize', window._galleryResizeHandler);
-    window._galleryResizeHandler = runLayoutThrottled;
-    window.addEventListener('resize', window._galleryResizeHandler);
-    
-    const observer = new ResizeObserver(runLayoutThrottled);
-    observer.observe(galleryList);
+    window.addEventListener('resize', runLayout);
   });
-}
-
-function injectLightboxHTML() {
-  if (document.querySelector(GALLERY_SETTINGS.lightboxSelector)) return;
-  
-  const lightboxHTML = `
-    <div id="custom-lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column;">
-      <div id="lb-counter" style="color:white; margin-bottom:15px; font-family:sans-serif; opacity:0.7; font-size: 14px; letter-spacing: 1px;"></div>
-      <div style="position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:85%;">
-        <img id="lightbox-img" src="" style="max-width:90%; max-height:100%; object-fit:contain; border-radius:2px;">
-        <button id="lb-prev" style="position:absolute; left:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer; padding:20px;">&#10094;</button>
-        <button id="lb-next" style="position:absolute; right:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer; padding:20px;">&#10095;</button>
-      </div>
-    </div>
-  `;
-  document.body.insertAdjacentHTML('beforeend', lightboxHTML);
 }
 
 function initLightbox() {
@@ -221,14 +212,13 @@ function initLightbox() {
     currentIndex = allImgsInGallery.indexOf(clickedImg);
     
     updateLightbox();
-    if (lightbox) lightbox.style.display = 'flex';
+    lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   });
 
   function updateLightbox() {
-    if (!lbImg) return;
     lbImg.src = currentGalleryImages[currentIndex];
-    if (lbCounter) lbCounter.innerText = `${currentIndex + 1} / ${currentGalleryImages.length}`;
+    lbCounter.innerText = `${currentIndex + 1} / ${currentGalleryImages.length}`;
   }
 
   const next = (e) => { 
@@ -243,44 +233,50 @@ function initLightbox() {
     updateLightbox(); 
   };
 
-  const btnNext = document.querySelector(GALLERY_SETTINGS.lightboxNextSelector);
-  const btnPrev = document.querySelector(GALLERY_SETTINGS.lightboxPrevSelector);
+  const nextButton = document.querySelector(GALLERY_SETTINGS.lightboxNextSelector);
+  const prevButton = document.querySelector(GALLERY_SETTINGS.lightboxPrevSelector);
   
-  if (btnNext) btnNext.onclick = next;
-  if (btnPrev) btnPrev.onclick = prev;
+  if (nextButton) nextButton.onclick = next;
+  if (prevButton) prevButton.onclick = prev;
   
-  if (lightbox) {
-    lightbox.addEventListener('click', function(e) {
-      const isClickOnImage = e.target.closest('#lightbox-img');
-      const isClickOnPrev = e.target.closest('#lb-prev');
-      const isClickOnNext = e.target.closest('#lb-next');
-      
-      if (!isClickOnImage && !isClickOnPrev && !isClickOnNext) {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        if (lbImg) lbImg.src = "";
-      }
-    });
-  }
+  lightbox.onclick = () => {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    lbImg.src = "";
+  };
 
   document.onkeydown = (e) => {
-    if (lightbox && lightbox.style.display === 'flex') {
-      if (e.key === "ArrowRight") { e.preventDefault(); next(); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
-      if (e.key === "Escape") { 
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        if (lbImg) lbImg.src = "";
-      }
+    if (lightbox.style.display === 'flex') {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "Escape") lightbox.onclick();
     }
   };
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function initGalleries() {
+  injectStyles();
   injectLightboxHTML();
-  generateGalleryFromList();
-  setTimeout(() => {
-    initLayout();
-  }, 50);
+  
+  const wrappers = document.querySelectorAll('.gallery_wrapper');
+  
+  if (wrappers.length === 0) {
+    const randomWrapper = document.createElement('div');
+    randomWrapper.className = 'gallery_wrapper';
+    document.body.appendChild(randomWrapper);
+    generateRandomGallery(randomWrapper);
+  } else {
+    wrappers.forEach(wrapper => {
+      generateGalleryFromWrapper(wrapper);
+    });
+  }
+  
+  initLayout();
   initLightbox();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGalleries);
+} else {
+  initGalleries();
+}

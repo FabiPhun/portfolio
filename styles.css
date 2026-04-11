@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+
 :root{
-    --font-copyright:'Moresugar', sans-serif;
-    --font-title:'Moresugar', sans-serif;
-    --font-subtitle:'Moresugar', sans-serif; 
+    --font-copyright:'Quicksand', sans-serif;
+    --font-title:'Quicksand', sans-serif;
+    --font-subtitle:'Quicksand', sans-serif; 
 }
 
 * {
   box-sizing: border-box;
 }
+
+
 
 /* ENTFERNT: body styles - die kommen jetzt aus styles.css */
 

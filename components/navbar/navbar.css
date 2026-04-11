@@ -3,6 +3,10 @@
 /* ===== custom fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
+body {
+    user-select: none;
+}
+
 :root {
     /* ===== TYPOGRAPHY BASE ===== */
     --font-primary: "Quicksand", sans-serif;
@@ -20,7 +24,7 @@
     --mobile-header-bg: #474c81;
     --color-overlay: rgba(0, 0, 0, 0.5);
 
-    --width-nav-desktop: 350px;
+    --width-nav-desktop: 130%;
     --padding-nav-desktop: 60px 0 0 50px;
     --gap-nav-desktop: 0;
     
@@ -31,7 +35,7 @@
 
     /* =====  MAIN WRAPPER STYLES ===== */
     --padding-nav-main-wrapper-desktop: 0 0 0 0;
-    --margin-nav-main-wrapper-desktop: 0 0 25px 0;
+    --margin-nav-main-wrapper-desktop: 0 0 15px 0;
     --gap-nav-main-wrapper-desktop: 5px;
     
     --padding-nav-main-wrapper-mobile: 0 0 3vh 0;
@@ -45,7 +49,7 @@
     --color-mainlink-hover: #bdbdbd;
 
     /* Desktop Font */
-    --fontsize-mainlink-desktop: 24px;
+    --fontsize-mainlink-desktop: 20px;
     --fontweight-mainlink-desktop: 600;
     --fontstyle-mainlink-desktop: normal;
     --letterspacing-mainlink-desktop: normal;
@@ -71,7 +75,7 @@
 
     /* ===== CATEGORY WRAPPER STYLES ===== */
     --padding-nav-category-wrapper-desktop: 0;
-    --margin-nav-category-wrapper-desktop: 0 0 10px 0;
+    --margin-nav-category-wrapper-desktop: 0 0 5px 0;
     --gap-nav-category-wrapper-desktop: 0;
     
     --padding-nav-category-wrapper-mobile: 0;
@@ -85,7 +89,7 @@
     --color-category-link-hover: #b8cdff;
 
     /* Desktop Font */
-    --fontsize-category-link-desktop: 16px;
+    --fontsize-category-link-desktop: 14px;
     --fontweight-category-link-desktop: 600;
     --fontstyle-category-link-desktop: normal;
     --letterspacing-category-link-desktop: 2px;
@@ -125,7 +129,7 @@
     --color-category-sublink-hover: #e0eaff;
 
     /* Desktop Font */
-    --fontsize-category-sublink-desktop: 14px;
+    --fontsize-category-sublink-desktop: 12px;
     --fontweight-category-sublink-desktop: 500;
     --fontstyle-category-sublink-desktop: normal;
     --letterspacing-category-sublink-desktop: normal;
@@ -168,6 +172,9 @@
     flex-direction: column;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0px 0px 60px #0000004b;
+
+    outline: 1px solid #474c81;
 }
 
 .main-nav .nav-content {
@@ -505,19 +512,22 @@ body.menu-open {
 @media (hover: hover) {
     .main-nav .nav-main-section-link:hover,
     .mobile-nav-menu .nav-main-section-link:hover {
-        letter-spacing: 0.5px;
-        transition: letter-spacing var(--transition-speed);
+        transform: scaleX(1.03);
+        transform-origin: left;
+        transition: transform var(--transition-speed);
     }
 
     .main-nav .nav-category-sublink:hover,
     .mobile-nav-menu .nav-category-sublink:hover {
-        letter-spacing: 0.1px;
-        transition: letter-spacing var(--transition-speed);
+        transform: scaleX(1.01);
+        transform-origin: left;
+        transition: transform var(--transition-speed);
     }
 
     .nav-category-link:hover {
-        letter-spacing: 2.1px;
-        transition: letter-spacing var(--transition-speed);
+        transform: scaleX(1.01);
+        transform-origin: left;
+        transition: transform var(--transition-speed);
     }
     
     .mobile-nav-toggle:hover {

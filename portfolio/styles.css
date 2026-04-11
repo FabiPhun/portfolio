@@ -1,8 +1,9 @@
 /* !!--------------------------------------Styling Settings---------------------------------------!! */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 :root {
-    --body-background-color: black;
-    --desktop-body-content-container-padding: 3% 15vw 5%;
+    --body-background-color: #141418;
+    --desktop-body-content-container-padding: 3% 13% 5% 18%;
     --mobile-body-content-container-padding: 5vw 8vw 5vw;
 }
 
@@ -25,7 +26,16 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;     
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @media screen and (max-width: 991px) {  
@@ -35,3 +45,38 @@ body {
 }
 
 /* !!---------------------------------------------------------------------------------------------!! */
+
+h1 {
+    color: white;
+    font-size: 35px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+h2 {
+    color: white;
+    font-size: 25px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.body_item {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.body_item_wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
