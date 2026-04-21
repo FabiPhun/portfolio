@@ -33,14 +33,15 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
 
-@media screen and (max-width: 991px) {  
+@media screen and (max-width: 991px) {
     .body_content {
-        padding: var(--mobile-body-content-container-padding); 
+        padding: var(--mobile-body-content-container-padding);
     }
 }
 
@@ -50,7 +51,7 @@ h1 {
     color: white;
     font-size: 35px;
     font-family: "Quicksand", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 5px;
     margin: 0 0 10px 0;
@@ -59,13 +60,14 @@ h1 {
 
 h2 {
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     font-family: "Quicksand", sans-serif;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 5px;
     margin: 0 0 10px 0;
-    text-align: center;
+    text-align: left;
+    transition: .2s;
 }
 
 .body_item {
@@ -80,3 +82,63 @@ h2 {
     margin-bottom: 50px;
 }
 
+
+
+
+/* CUSTOM --------------------------------------------------------------------  */
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 30px;
+    row-gap: 60px;
+}
+
+.card-item {
+    position: relative;
+    aspect-ratio: 2/3;
+    cursor: pointer;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.card-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transition: .5s;
+}
+
+.title-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    background-color: #1d1d25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+
+.card-text {
+    color: #bdbdbd;
+    font-size: 0.6vw;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    transition: .2s;
+}
+
+.card-item:hover .card-img,
+.card-item:hover .card-text {
+    transform: scale(1.05);
+}
