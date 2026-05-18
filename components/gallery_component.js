@@ -30,6 +30,14 @@ function injectStyles() {
       margin-bottom: 0;
       object-fit: cover;
       cursor: pointer;
+      transform: scale(1);
+      outline: 0px solid transparent;
+      transition: transform 0.3s ease, outline 0.3s ease;
+    }
+
+    .gallery_image:hover {
+      outline: 2px solid #0084ff;
+      transform: scale(1.01);
     }
   `;
   document.head.appendChild(styleElement);

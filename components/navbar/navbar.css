@@ -24,8 +24,8 @@ body {
     --mobile-header-bg: #474c81;
     --color-overlay: rgba(0, 0, 0, 0.5);
 
-    --width-nav-desktop: 130%;
-    --padding-nav-desktop: 60px 0 0 50px;
+    --width-nav-desktop: 100%;
+    --padding-nav-desktop: 60px 50px 0 50px;
     --gap-nav-desktop: 0;
     
     --width-nav-mobile: 40vh;
@@ -161,10 +161,10 @@ body {
     background-color: var(--nav-bg);
     width: var(--width-nav-desktop);
     height: 100vh;
-    padding: var(--padding-nav-desktop);
     position: sticky;
     top: 0;
     left: 0;
+    flex-shrink: 0;
     z-index: 1000;
     font-family: var(--font-primary);
     font-size: var(--fontsize-base-desktop);
@@ -182,8 +182,12 @@ body {
     gap: var(--gap-nav-desktop);
     flex: 1;
     overflow-y: auto;
-    padding-right: 5px;
 }
+
+.nav-content {
+    padding: var(--padding-nav-desktop);
+}
+
 
 /* Nav Main Wrapper */
 .main-nav .nav-main-wrapper {
