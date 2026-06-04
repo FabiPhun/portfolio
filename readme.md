@@ -1,4 +1,4 @@
-#Rules for Portfolio Website
+# Rules for Portfolio Website
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -6,7 +6,7 @@
 
 BODY ------------------------------------ .body_content
 
--> ITEM WRAPPER ------------------------- `.body_item_wrapper` >there can be multiple if content needs to be clearly seperated e.g. one shows images, the other is purely text.
+-> ITEM WRAPPER ------------------------- `.body_item_wrapper` > there can be multiple if content needs to be clearly seperated e.g. one shows images, the other is purely text.
    -> ITEM HOLDER ----------------------- `.body_item`
       -> ITEM or multiple ITEMS --------- `item class or id`
 
