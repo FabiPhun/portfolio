@@ -32,7 +32,7 @@ function injectStyles() {
       cursor: pointer;
       transform: scale(1);
       outline: 0px solid transparent;
-      transition: transform 0.3s ease, outline 0.3s ease;
+      transition: transform 0.3s ease, outline 0.1s ease;
     }
 
     .gallery_image:hover {

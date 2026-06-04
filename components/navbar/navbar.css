@@ -29,7 +29,7 @@ body {
     --gap-nav-desktop: 0;
     
     --width-nav-mobile: 40vh;
-    --padding-nav-mobile: 6vh 0 0 5vh;
+    --padding-nav-mobile: 6vh 5vh 6vh 5vh;
     --gap-nav-mobile: 0;
 
 
@@ -79,7 +79,7 @@ body {
     --gap-nav-category-wrapper-desktop: 0;
     
     --padding-nav-category-wrapper-mobile: 0;
-    --margin-nav-category-wrapper-mobile: 0 0 1svh 0;
+    --margin-nav-category-wrapper-mobile: 0 0 0 0;
     --gap-nav-category-wrapper-mobile: 0;
 
 
@@ -98,7 +98,7 @@ body {
     --lineheight-category-link-desktop: 1;
 
     /* Mobile Font */
-    --fontsize-category-link-mobile: 2.2svh;
+    --fontsize-category-link-mobile: 2.5svh;
     --fontweight-category-link-mobile: 600;
     --fontstyle-category-link-mobile: normal;
     --letterspacing-category-link-mobile: 0.2svh;
@@ -110,7 +110,7 @@ body {
     --padding-category-link-desktop: 0;
     --margin-category-link-desktop: 0;
     --padding-category-link-mobile: 0;
-    --margin-category-link-mobile: 0;
+    --margin-category-link-mobile: 0 0 1svh 0;
 
 
     /* ===== SUBLINK WRAPPER STYLES ===== */
@@ -119,8 +119,8 @@ body {
     --gap-nav-category-sublink-wrapper-desktop: 10px;
     
     --padding-nav-category-sublink-wrapper-mobile: 0 0 0 1svh;
-    --margin-nav-category-sublink-wrapper-mobile: 1svh 0 1.5svh 0;
-    --gap-nav-category-sublink-wrapper-mobile: 1svh;
+    --margin-nav-category-sublink-wrapper-mobile: 0 0 4svh 0;
+    --gap-nav-category-sublink-wrapper-mobile: 2svh;
 
 
     /* ===== SUBLINK STYLES ===== */
@@ -129,12 +129,12 @@ body {
     --color-category-sublink-hover: #e0eaff;
 
     /* Desktop Font */
-    --fontsize-category-sublink-desktop: 12px;
+    --fontsize-category-sublink-desktop: 14px;
     --fontweight-category-sublink-desktop: 500;
     --fontstyle-category-sublink-desktop: normal;
     --letterspacing-category-sublink-desktop: normal;
     --wordspacing-category-sublink-desktop: 4px;
-    --texttransform-category-sublink-desktop: uppercase;
+    --texttransform-category-sublink-desktop: normal;
     --lineheight-category-sublink-desktop: 1;
 
     /* Mobile Font */
@@ -143,7 +143,7 @@ body {
     --fontstyle-category-sublink-mobile: normal;
     --letterspacing-category-sublink-mobile: normal;
     --wordspacing-category-sublink-mobile: 0.4svh;
-    --texttransform-category-sublink-mobile: uppercase;
+    --texttransform-category-sublink-mobile: normal;
     --lineheight-category-sublink-mobile: 1;
 
     /* Spacing */
