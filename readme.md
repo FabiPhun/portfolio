@@ -8,17 +8,17 @@
 ##### Pseudo Code
 ```
 BODY
-⤷ ITEM WRAPPER
-   ⤷ ITEM HOLDER 
-      ⤷ ITEM or multiple ITEMS
+⤷ ITEM WRAPPER                      > makes' it look good
+   ⤷ ITEM HOLDER                    > holds' the items
+      ⤷ item or multiple items'     > your stuff
 ```
   
-##### Class Names
+##### Class Names'
 
 `body_content`  
 ⤷ `body_item_wrapper`  
 ⤷ `body_item`
 
-> Multiple `.body_item_wrapper` are allowed if you need to distinguish two types of content.
+> Multiple `.body_item_wrapper` are allowed if you need to distinguish two types' of content.
 
 ---
