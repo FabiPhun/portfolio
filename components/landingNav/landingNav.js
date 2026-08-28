@@ -26,7 +26,7 @@ function loadLandingNav() {
         
         // Spezialfall für Home (wenn keine Datei in der URL)
         if (currentPath === '/' || currentPath === '') {
-          if (href === 'home.html' || href === '/') {
+          if (href === 'index.html' || href === '/') {
             link.setAttribute('current', '');
           }
         }
