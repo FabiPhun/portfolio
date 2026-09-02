@@ -496,10 +496,23 @@ body.menu-open {
 /* !!--------------------------------------RESPONSIVE---------------------------------------!! */
 @media screen and (max-width: 991px) {
     .main-nav {
-        display: none;
+        display: none !important;
     }
     .mobile-nav-container {
-        display: block;
+        display: block !important;
+    }
+}
+
+/* FIX: Mobile Navbar bei Desktop ausblenden - KEIN FLACKERN MEHR! */
+@media screen and (min-width: 992px) {
+    .mobile-nav-container {
+        display: none !important;
+    }
+    .mobile-nav-overlay {
+        display: none !important;
+    }
+    .mobile-nav-menu {
+        display: none !important;
     }
 }
 
