@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-    <script src="../../components/navbar/navbar.js"></script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio gallery template</title>
-    <link href="../styles.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="../styles.css">
 </head>
-
 <body>
-    <div directoryfix="../../" id="navbar-container"></div>
+    <div id="navbar-container" directoryFix="../../"></div>
+
     <div class="body_content">
-        <div class="gallery_wrapper" fc-gallery="list" folder-path="" image-spacing="5px" images="" maximages="4"
+        <div
+            class="gallery_wrapper"
+            image-spacing="5px"
+            maxImages="4"
+            folder-path=""
+            images=""
+            fc-gallery="list"
             row-stretch="1">
         </div>
     </div>
+
     <!-- components -->
     <script src="../../components/gallery_component.js"></script>
-
+    <script src="../../components/navbar/navbar.js"></script>
 </body>
-
 </html>

@@ -1,60 +1,72 @@
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-    <script src="../components/navbar/navbar.js"></script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio gallery template</title>
-    <link href="styles.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div directoryfix="../" id="navbar-container"></div>
+    <div id="navbar-container" directoryFix="../"></div>
+
     <div class="body_content">
+
         <div class="body_item_wrapper">
             <div class="body_item">
                 <div class="gallery_section_wrapper">
                     <h2>characters'</h2>
-                    <div class="gallery_wrapper" folder-path="../images/modelling_and_rigging/characters"
+                    <div
+                        class="gallery_wrapper"
                         image-spacing="5px"
-                        images="fredbear_rendered.jpeg, fred_hand.jpeg*, samus_closeup.jpeg, samus_fullbody.png*, lara_side.jpeg, lara_front.jpeg, william_front.png"
-                        maximages="4">
+                        maxImages="4"
+                        folder-path="../images/modelling_and_rigging/characters"
+                        images="fredbear_rendered.jpeg, fred_hand.jpeg*, samus_closeup.jpeg, samus_fullbody.png*, lara_side.jpeg, lara_front.jpeg, william_front.png">
                     </div>
                 </div>
                 <div class="gallery_section_wrapper">
-                    <h2>environments' &amp; props'</h2>
-                    <div class="gallery_wrapper" folder-path="../images/modelling_and_rigging/environments_props"
+                    <h2>environments' & props'</h2>
+                    <div
+                        class="gallery_wrapper"
                         image-spacing="5px"
-                        images="office.png, office_back.png*, rocks.png, skirting.png, lantern.jpeg, friendship.png*, hallway.jpeg, room.jpeg"
-                        maximages="5">
+                        maxImages="5"
+                        folder-path="../images/modelling_and_rigging/environments_props"
+                        images="office.png, office_back.png*, rocks.png, skirting.png, lantern.jpeg, friendship.png*, hallway.jpeg, room.jpeg">
                     </div>
                 </div>
                 <div class="gallery_section_wrapper">
                     <h2>product modelling</h2>
-                    <div class="gallery_wrapper" folder-path="../images/modelling_and_rigging/packaging_items"
+                    <div
+                        class="gallery_wrapper"
                         image-spacing="5px"
-                        images="9.png, 18.png, 20.png*, 22.png, 23.jpeg, 4.png, 3.png*, 8.png, 1.png, 7.png, 5.png*, 10.png, 11.png"
-                        maximages="4">
+                        maxImages="4"
+                        folder-path="../images/modelling_and_rigging/packaging_items"
+                        images="9.png, 18.png, 20.png*, 22.png, 23.jpeg, 4.png, 3.png*, 8.png, 1.png, 7.png, 5.png*, 10.png, 11.png">
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="body_item_wrapper">
             <div class="body_item">
                 <div class="gallery_section_wrapper">
                     <h2>rigging</h2>
-                    <div class="gallery_wrapper" folder-path="../images/modelling_and_rigging/rigging"
-                        image-spacing="5px" images="fredbear.png, william.png, sonic.png, chair.png" maximages="2">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="2"
+                        folder-path="../images/modelling_and_rigging/rigging"
+                        images="fredbear.png, william.png, sonic.png, chair.png">
                     </div>
                 </div>
             </div>
         </div>
+        
+
     </div>
+
     <!-- components -->
     <script src="../components/gallery_component.js"></script>
-
+    <script src="../components/navbar/navbar.js"></script>
 </body>
-
 </html>

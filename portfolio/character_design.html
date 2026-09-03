@@ -1,52 +1,70 @@
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-    <script src="../components/navbar/navbar.js"></script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio gallery template</title>
-    <link href="styles.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div directoryfix="../" id="navbar-container"></div>
+    <div id="navbar-container" directoryFix="../"></div>
+
     <div class="body_content">
+
         <div class="body_item_wrapper">
             <div class="body_item">
                 <div class="gallery_section_wrapper">
                     <h2>William Afton</h2>
-                    <div class="gallery_wrapper" folder-path="../images/character_design/was" image-spacing="5px"
-                        images="william_head.png, william_head_final.png , William_Fullbody_final.png" maximages="5">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="5"
+                        folder-path="../images/character_design/was"
+                        images="william_head.png, william_head_final.png , William_Fullbody_final.png"
+                        >
                     </div>
                 </div>
+
                 <div class="gallery_section_wrapper">
                     <h2>Amy</h2>
-                    <div class="gallery_wrapper" folder-path="../images/character_design/was" image-spacing="5px"
-                        images="girl_3.png, little_girl_styleideas.png*, Facial_F.png, 3.png" maximages="5">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="5"
+                        folder-path="../images/character_design/was"
+                        images="girl_3.png, little_girl_styleideas.png*, Facial_F.png, 3.png"
+                        >
                     </div>
                 </div>
+
                 <div class="gallery_section_wrapper">
                     <h2>Ember</h2>
-                    <div class="gallery_wrapper" folder-path="../images/character_design/icarus" image-spacing="5px"
-                        images="ica4.png, ember_idea.png*, icarus_1.png, headtest.png, aaa.png*, icarus_2.png, ember_west.png"
-                        maximages="5">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="5"
+                        folder-path="../images/character_design/icarus"
+                        images="ica4.png, ember_idea.png*, icarus_1.png, headtest.png, aaa.png*, icarus_2.png, ember_west.png">
                     </div>
                 </div>
+
                 <div class="gallery_section_wrapper">
-                    <h2>miscellaneous</h2>
-                    <div class="gallery_wrapper" folder-path="../images/character_design/misc" image-spacing="5px"
-                        images="Final.png, cindy.png*, Jim.png, cloudgirl.png, firehad.png*, d00dledate.png, head.png, Screenshot_17.png"
-                        maximages="5">
+                <h2>miscellaneous</h2>
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="5"
+                        folder-path="../images/character_design/misc"
+                        images="Final.png, cindy.png*, Jim.png, cloudgirl.png, firehad.png*, d00dledate.png, head.png, Screenshot_17.png">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- components -->
     <script src="../components/gallery_component.js"></script>
-
+    <script src="../components/navbar/navbar.js"></script>
 </body>
-
 </html>

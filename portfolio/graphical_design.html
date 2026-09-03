@@ -1,51 +1,74 @@
 <!DOCTYPE html>
-
 <html lang="de">
-
 <head>
-    <script src="../components/navbar/navbar.js"></script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio gallery template</title>
-    <link href="styles.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div directoryfix="../" id="navbar-container"></div>
+    <div id="navbar-container" directoryFix="../"></div>
+
     <div class="body_content">
+
+
         <div class="body_item_wrapper">
             <div class="body_item">
+
                 <div class="gallery_section_wrapper">
                     <h2>©Siegfrieds' Mechanical Musiccabinett</h2>
-                    <div class="gallery_wrapper" folder-path="../images/graphical_design/smmk" image-spacing="5px"
-                        images="moodboard.png, box.png, s1.png*, broshure.png, broshure_in.png*, s2.png, s3.png, s4.png"
-                        maximages="4">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="4"
+                        folder-path="../images/graphical_design/smmk"
+                        images="moodboard.png, box.png, s1.png*, broshure.png, broshure_in.png*, s2.png, s3.png, s4.png">
                     </div>
                 </div>
+
+
                 <div class="gallery_section_wrapper">
                     <h2>BEES</h2>
-                    <div class="gallery_wrapper" folder-path="../images/graphical_design/bees" image-spacing="5px"
-                        images="magicbike.png, guest.png, magicbike_logo.png" maximages="4">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="4"
+                        folder-path="../images/graphical_design/bees"
+                        images="magicbike.png, guest.png, magicbike_logo.png">
                     </div>
                 </div>
+
+
                 <div class="gallery_section_wrapper">
                     <h2>Nintendo®</h2>
-                    <div class="gallery_wrapper" folder-path="../images/graphical_design" image-spacing="5px"
-                        images="animalcrossing.png, animalcrossing_mask.png" maximages="4">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="4"
+                        folder-path="../images/graphical_design"
+                        images="animalcrossing.png, animalcrossing_mask.png">
                     </div>
                 </div>
+
                 <div class="gallery_section_wrapper">
                     <h2>miscellaneous</h2>
-                    <div class="gallery_wrapper" folder-path="../images/graphical_design" image-spacing="5px"
-                        images="skate.png" maximages="4">
+                    <div
+                        class="gallery_wrapper"
+                        image-spacing="5px"
+                        maxImages="4"
+                        folder-path="../images/graphical_design"
+                        images="skate.png">
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
+
     <!-- components -->
     <script src="../components/gallery_component.js"></script>
-
+    <script src="../components/navbar/navbar.js"></script>
 </body>
-
 </html>

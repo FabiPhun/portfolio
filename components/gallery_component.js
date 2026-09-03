@@ -17,15 +17,8 @@ function injectStyles() {
     .gallery_justified {
       display: flex;
       flex-wrap: wrap;
-      margin: -5px;
-      opacity: 0;
-      transition: opacity 0.6s ease;
+      margin: -5px; 
     }
-    
-    .gallery_justified.visible {
-      opacity: 1;
-    }
-    
     .gallery_item {
       padding: 5px; 
       box-sizing: border-box;
@@ -76,7 +69,7 @@ function generateRandomGallery(wrapper) {
   galleryDiv.className = 'gallery_justified';
   galleryDiv.style.gap = imageSpacing;
   galleryDiv.style.margin = `-${imageSpacing}`;
-  galleryDiv.dataset.maxColumns = maxColumns;
+  galleryDiv.dataset.maxColumns = maxColumns; // Speichere maxColumns für diese Galerie
   
   for (let i = 0; i < randomCount; i++) {
     const width = Math.floor(Math.random() * 600) + 400;
@@ -98,37 +91,6 @@ function generateRandomGallery(wrapper) {
   
   wrapper.innerHTML = '';
   wrapper.appendChild(galleryDiv);
-  
-  // Warte bis alle Bilder geladen sind, dann zeige die Galerie
-  const images = galleryDiv.querySelectorAll('img');
-  let loadedCount = 0;
-  
-  if (images.length === 0) {
-    galleryDiv.classList.add('visible');
-    return;
-  }
-  
-  images.forEach(img => {
-    if (img.complete) {
-      loadedCount++;
-      if (loadedCount === images.length) {
-        galleryDiv.classList.add('visible');
-      }
-    } else {
-      img.addEventListener('load', function() {
-        loadedCount++;
-        if (loadedCount === images.length) {
-          galleryDiv.classList.add('visible');
-        }
-      });
-      img.addEventListener('error', function() {
-        loadedCount++;
-        if (loadedCount === images.length) {
-          galleryDiv.classList.add('visible');
-        }
-      });
-    }
-  });
 }
 
 function generateGalleryFromWrapper(wrapper) {
@@ -149,7 +111,7 @@ function generateGalleryFromWrapper(wrapper) {
   galleryDiv.className = 'gallery_justified';
   galleryDiv.style.gap = imageSpacing;
   galleryDiv.style.margin = `-${imageSpacing}`;
-  galleryDiv.dataset.maxColumns = maxColumns;
+  galleryDiv.dataset.maxColumns = maxColumns; // Speichere maxColumns für diese Galerie
   
   imageEntries.forEach(entry => {
     const hasBreak = entry.endsWith('*');
@@ -175,37 +137,6 @@ function generateGalleryFromWrapper(wrapper) {
   
   wrapper.innerHTML = '';
   wrapper.appendChild(galleryDiv);
-  
-  // Warte bis alle Bilder geladen sind, dann zeige die Galerie
-  const images = galleryDiv.querySelectorAll('img');
-  let loadedCount = 0;
-  
-  if (images.length === 0) {
-    galleryDiv.classList.add('visible');
-    return;
-  }
-  
-  images.forEach(img => {
-    if (img.complete) {
-      loadedCount++;
-      if (loadedCount === images.length) {
-        galleryDiv.classList.add('visible');
-      }
-    } else {
-      img.addEventListener('load', function() {
-        loadedCount++;
-        if (loadedCount === images.length) {
-          galleryDiv.classList.add('visible');
-        }
-      });
-      img.addEventListener('error', function() {
-        loadedCount++;
-        if (loadedCount === images.length) {
-          galleryDiv.classList.add('visible');
-        }
-      });
-    }
-  });
 }
 
 function setGalleryLayout(container, galleryImages, gapPx) {

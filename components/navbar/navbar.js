@@ -18,54 +18,13 @@
     const navbarDir = navbarScriptPath.substring(0, navbarScriptPath.lastIndexOf('/') + 1);
 
     function loadNavbarCSS() {
-        if (document.getElementById('navbar-css')) {
-            return;
+        if (!document.querySelector('link[href*="navbar.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = navbarDir + 'navbar.css';
+            document.head.appendChild(link);
         }
-
-        const cssCacheKey = 'navbarCSS::' + navbarDir;
-        let cachedCSS = null;
-        try {
-            cachedCSS = sessionStorage.getItem(cssCacheKey);
-        } catch (e) {
-            // sessionStorage unavailable (e.g. private browsing) - just skip caching
-        }
-
-        if (cachedCSS) {
-            const style = document.createElement('style');
-            style.id = 'navbar-css';
-            style.textContent = cachedCSS;
-            document.head.appendChild(style);
-            return;
-        }
-
-        fetch(navbarDir + 'navbar.css')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(cssText => {
-                try {
-                    sessionStorage.setItem(cssCacheKey, cssText);
-                } catch (e) {
-                    // storage full or unavailable - fine, just won't cache
-                }
-                if (document.getElementById('navbar-css')) return;
-                const style = document.createElement('style');
-                style.id = 'navbar-css';
-                style.textContent = cssText;
-                document.head.appendChild(style);
-            })
-            .catch(error => {
-                console.error('navbar.css fetch failed:', error);
-            });
     }
-
-    // Inject CSS as early as possible (before DOMContentLoaded) so a cached
-    // stylesheet is already applied by the time the navbar HTML lands -
-    // no flash of unstyled navbar on repeat visits.
-    loadNavbarCSS();
 
     function loadNavbarHTML(callback) {
         const navbarContainer = document.getElementById('navbar-container');
@@ -81,41 +40,6 @@
             return;
         }
 
-        function applyMarkup(data, fromCache) {
-            navbarContainer.innerHTML = data;
-
-            const showDesktop = navbarContainer.getAttribute('desktopNav') !== 'false';
-            const showMobile = navbarContainer.getAttribute('mobileNav') !== 'false';
-
-            if (!showDesktop) {
-                const desktopNav = document.getElementById('desktopNav');
-                if (desktopNav) desktopNav.remove();
-            }
-
-            if (!showMobile) {
-                const mobileNav = document.getElementById('mobileNav');
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileNav) mobileNav.remove();
-                if (mobileMenu) mobileMenu.remove();
-            }
-
-            if (callback) callback();
-            setTimeout(adjustBodyContentPadding, fromCache ? 20 : 100);
-        }
-
-        const cacheKey = 'navbarHTML::' + navbarDir;
-        let cached = null;
-        try {
-            cached = sessionStorage.getItem(cacheKey);
-        } catch (e) {
-            // sessionStorage unavailable (e.g. private browsing) - just skip caching
-        }
-
-        if (cached) {
-            applyMarkup(cached, true);
-            return;
-        }
-
         fetch(navbarDir + 'navbar.html')
             .then(response => {
                 if (!response.ok) {
@@ -124,12 +48,25 @@
                 return response.text();
             })
             .then(data => {
-                try {
-                    sessionStorage.setItem(cacheKey, data);
-                } catch (e) {
-                    // storage full or unavailable - fine, just won't cache
+                navbarContainer.innerHTML = data;
+
+                const showDesktop = navbarContainer.getAttribute('desktopNav') !== 'false';
+                const showMobile = navbarContainer.getAttribute('mobileNav') !== 'false';
+
+                if (!showDesktop) {
+                    const desktopNav = document.getElementById('desktopNav');
+                    if (desktopNav) desktopNav.remove();
                 }
-                applyMarkup(data, false);
+
+                if (!showMobile) {
+                    const mobileNav = document.getElementById('mobileNav');
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileNav) mobileNav.remove();
+                    if (mobileMenu) mobileMenu.remove();
+                }
+
+                if (callback) callback();
+                setTimeout(adjustBodyContentPadding, 100);
             })
             .catch(error => {
                 console.error('Fetch failed:', error);
@@ -203,45 +140,18 @@
         e.preventDefault();
 
         const targetFile = this.getAttribute('href');
-
-        let destinationURL;
-
+        
         if (targetFile.startsWith('http') || targetFile.startsWith('www')) {
-            destinationURL = targetFile.startsWith('www') ? 'https://' + targetFile : targetFile;
-        } else {
-            const navbarContainer = document.getElementById('navbar-container');
-            let baseDir = navbarContainer?.getAttribute('directoryFix') || '';
-            destinationURL = baseDir + targetFile;
-        }
-
-        // Resolve against the current location so relative paths, missing
-        // trailing slashes, etc. compare correctly.
-        let resolved;
-        try {
-            resolved = new URL(destinationURL, window.location.href);
-        } catch (err) {
-            window.location.href = destinationURL;
+            window.location.href = targetFile.startsWith('www') ? 'https://' + targetFile : targetFile;
             return;
         }
 
-        const normalize = (pathname) => pathname.replace(/\/+$/, '') || '/';
-
-        const isSamePage =
-            resolved.origin === window.location.origin &&
-            normalize(resolved.pathname) === normalize(window.location.pathname) &&
-            resolved.search === window.location.search;
-
-        if (isSamePage) {
-            // Already on this page - don't trigger a reload (and the
-            // navbar flicker that comes with it). Still honor an in-page
-            // hash if one was given.
-            if (resolved.hash && resolved.hash !== window.location.hash) {
-                window.location.hash = resolved.hash;
-            }
-            return;
-        }
-
-        window.location.href = destinationURL;
+        const navbarContainer = document.getElementById('navbar-container');
+        let baseDir = navbarContainer?.getAttribute('directoryFix') || '';
+        
+        let fullPath = baseDir + targetFile;
+        
+        window.location.href = fullPath;
     }
 
     //-----------!! mobile stuff !!-----------//
@@ -369,6 +279,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        loadNavbarCSS();
         loadNavbarHTML(function() {
             initNavigation();
             watchForNavbarChanges();
