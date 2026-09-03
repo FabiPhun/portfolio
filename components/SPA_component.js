@@ -63,7 +63,6 @@
             }
         }
 
-        // 1. Wait for scripts
         const scripts = document.querySelectorAll('.body_content script');
         if (scripts.length === 0) {
             done();
@@ -92,7 +91,6 @@
             }, 1000);
         }
 
-        // 2. Wait for images
         const images = document.querySelectorAll('.body_content img');
         if (images.length === 0) {
             done();
@@ -121,7 +119,6 @@
             }, 2000);
         }
 
-        // 3. Wait for event loop
         setTimeout(done, 50);
     }
 
@@ -187,6 +184,15 @@
                 bodyContent.style.display = 'none';
                 bodyContent.style.opacity = '0';
 
+                bodyContent.querySelectorAll('script').forEach(function (oldScript) {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(function (attr) {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+                    newScript.textContent = oldScript.textContent;
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
                 const hasGalleries = bodyContent.querySelectorAll('.gallery_wrapper').length > 0;
                 if (hasGalleries) {
                     loadGallery(function () {
@@ -206,15 +212,6 @@
                     });
                 }
 
-                bodyContent.querySelectorAll('script').forEach(function (oldScript) {
-                    const newScript = document.createElement('script');
-                    Array.from(oldScript.attributes).forEach(function (attr) {
-                        newScript.setAttribute(attr.name, attr.value);
-                    });
-                    newScript.textContent = oldScript.textContent;
-                    oldScript.parentNode.replaceChild(newScript, oldScript);
-                });
-
                 window.scrollTo(0, 0);
             })
             .catch(function (error) {
@@ -233,7 +230,6 @@
 
     window.navigateTo = navigateTo;
 
-    // Initial load - hide content, then show with fade-in when ready
     const hash = location.hash.replace('#', '');
     const bodyContent = document.querySelector('.body_content');
 

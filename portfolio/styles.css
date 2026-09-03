@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 :root {
-    --body-background-color: #141418;
-    --desktop-body-item-wrapper-padding: 3% 20% 0% 20%;;
+    --body-background-color: #1b1b29;
+    --desktop-body-item-wrapper-padding: 3% 10% 0% 10%;;
     --mobile-body-item-wrapper-padding: 10% 5% 0% 5%;
 
     --mobile-info-item-width: 100%;
@@ -25,7 +25,7 @@ body {
     flex-direction: row;
     min-height: 100vh;
     width: 100%;
-    margin: 0;
+    margin: 0 0 0 20px;
     padding: 0;
     background-color: var(--body-background-color);
     overflow-x: hidden;
@@ -54,8 +54,8 @@ body {
 /* !!---------------------------------------------------------------------------------------------!! */
 
 h1 {
-    color: white;
-    font-size: 35px;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
     font-family: "Quicksand", sans-serif;
     font-weight: 400;
     text-transform: uppercase;
@@ -65,7 +65,7 @@ h1 {
 }
 
 h2 {
-    color: white;
+    color: #b8b6c5;
     font-size: 20px;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
@@ -86,7 +86,7 @@ h3 {
 
 h4 {
     color: #a6abb8;
-    font-size: 12px;
+    font-size:8px;
     font-family: "Quicksand", sans-serif;
     font-weight: 500;
     text-align: center;
@@ -129,14 +129,26 @@ h4 {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 30px;
     row-gap: 60px;
 }
 
+/* This ensures the first two cards take up 1.5 columns each */
+.card-container a:first-child,
+.card-container a:nth-child(2) {
+    grid-column: span 1.5;
+}
+
+/* All other cards default to span 1 (one column) */
+.card-container a:not(:first-child):not(:nth-child(2)) {
+    grid-column: span 1;
+}
+
+/* Your existing card styles remain the same */
 .card-item {
     position: relative;
-    aspect-ratio: 2/3;
+    aspect-ratio: 16/9;
     cursor: pointer;
     overflow: hidden;
     align-items: center;
@@ -159,20 +171,19 @@ h4 {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 10%;
-    background-color: #1d1d25;
+    height: 20%;
+    background-color: #1d1d255b;
     display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(3px);
 }
 
-
 .card-text {
-    color: #bdbdbd;
-    font-size: 0.6vw;
+    color: #b3b3b3;
+    font-size: 0.65vw;
     font-family: "Quicksand", sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
     transition: .2s;

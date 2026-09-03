@@ -20,12 +20,13 @@ body {
 
 
     /* ===== NAVBAR LAYOUT ===== */
-    --nav-bg: #191a22;
+    --nav-bg: #202233;
     --mobile-header-bg: #474c81;
     --color-overlay: rgba(0, 0, 0, 0.5);
 
     --width-nav-desktop: 100%;
     --padding-nav-desktop: 60px 50px 0 50px;
+    --margin-nav-desktop: 0 0 0 0;
     --gap-nav-desktop: 0;
     
     --width-nav-mobile: 40vh;
@@ -186,6 +187,7 @@ body {
 
 .nav-content {
     padding: var(--padding-nav-desktop);
+    margin: var(--margin-nav-desktop);
 }
 
 
