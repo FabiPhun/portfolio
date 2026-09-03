@@ -1,8 +1,14 @@
+@font-face{
+  font-family: "MoreSugar";
+  src: url("../../fonts/MoreSugar-Thin.ttf") format("truetype");
+}
+
+
 :root {
   --text-hover: white;
   --primary: #474c81;
   --primary-hover: #98a1bc;
-  --navbar-font: 'Quicksand', sans-serif;
+  --navbar-font: 'MoreSugar';
   --navbar-font-size: 2vh;
   --logo-font-size: 2vh;
   --logo-subtitle-size: 1.5vh;
