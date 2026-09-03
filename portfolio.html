@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio gallery template</title>
-    
-    <link rel="stylesheet" href="/portfolio/styles.css">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="portfolio/styles.css">
 </head>
-<body>
-    <div id="navbar-container" directoryFix="../"></div>
 
-    <!-- components -->
+<body data-spa-mode="true">
+    <!-- NAVBAR - Permanent -->
+    <div id="navbar-container" directoryFix="/"></div>
+
+    <!-- CONTENT AREA - Wird ausgetauscht -->
+    <div class="body_content">
+        <section class="portfolio-grid">
+            <h1>My Portfolio</h1>
+            <div class="grid-container">
+                <!-- Your portfolio items here -->
+            </div>
+        </section>
+    </div>
+
     <script src="components/navbar/navbar.js"></script>
+    <script src="components/SPA_component.js"></script>
 </body>
+
 </html>
