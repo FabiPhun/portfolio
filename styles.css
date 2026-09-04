@@ -65,7 +65,7 @@ img {
 
 .content-home {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: center;
@@ -139,4 +139,10 @@ img {
   .hero-image.extra {
     height: 30%;
   }
+}
+
+h1{
+  color: black;
+  font-size: 20px;
+  font-family: MoreSugar;
 }
