@@ -1,7 +1,3 @@
-// ============================================
-// NAVBAR - COMPLETE FIXED VERSION
-// ============================================
-
 (function() {
     'use strict';
 
@@ -149,6 +145,37 @@
 
         // Watch for changes
         watchForNavbarChanges();
+    }
+
+    // ---------- REINIT MOBILE NAV ----------
+    function reinitMobileNav() {
+        const elements = {
+            menuToggle: document.getElementById('menuToggle'),
+            mobileMenu: document.getElementById('mobileMenu'),
+            mobileNav: document.getElementById('mobileNav')
+        };
+
+        // Only reinit if we have mobile nav elements
+        if (!elements.mobileNav || !elements.menuToggle || !elements.mobileMenu) {
+            return;
+        }
+
+        // Remove old overlay if exists
+        const oldOverlay = document.querySelector('.mobile-nav-overlay');
+        if (oldOverlay) oldOverlay.remove();
+
+        // Create new overlay
+        createOverlay();
+
+        // Re-setup mobile functionality
+        mobileNavbarFunctionality(elements.menuToggle, elements.mobileMenu);
+
+        // Re-setup nav links (they might have changed)
+        setupNavLinks();
+
+        // Adjust padding
+        setTimeout(adjustBodyContentPadding, 50);
+        setTimeout(adjustBodyContentPadding, 150);
     }
 
     // ---------- SETUP NAV LINKS ----------
@@ -395,6 +422,17 @@
             });
         }
     }
+
+    // ---------- LISTEN FOR SPA NAVIGATION ----------
+    document.addEventListener('navigate', function(e) {
+        // Re-initialize mobile nav after SPA navigation
+        setTimeout(reinitMobileNav, 100);
+        setTimeout(reinitMobileNav, 300);
+        setTimeout(reinitMobileNav, 500);
+    });
+
+    // Expose reinit function globally
+    window.reinitMobileNav = reinitMobileNav;
 
     console.log('Navbar initialized');
 
