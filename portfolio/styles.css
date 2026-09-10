@@ -1,9 +1,11 @@
 /* !!--------------------------------------Styling Settings---------------------------------------!! */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 
 :root {
     --body-background-color: #1b1b29;
-    --desktop-body-item-wrapper-padding: 3% 10% 0% 10%;;
+    --desktop-body-item-wrapper-padding: 3% 10% 0% 10%;
+    ;
     --mobile-body-item-wrapper-padding: 10% 5% 0% 5%;
 
     --mobile-info-item-width: 100%;
@@ -45,6 +47,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -85,7 +88,7 @@ h3 {
 
 h4 {
     color: #a6abb8;
-    font-size:8px;
+    font-size: 8px;
     font-family: "Quicksand", sans-serif;
     font-weight: 500;
     text-align: center;
@@ -194,6 +197,43 @@ h4 {
 }
 
 
+/* Project Items  --------------------------------------------------------------------  */
+
+.project_item {
+    display: flex;
+    flex: 0 auto;
+    width: 100%;
+    font-family: Quicksand;
+    background-color: green;
+}
+
+.project_text_item{
+    padding: 50px;
+}
+
+.project_header {
+    font-size: 250%;
+    font-family: abeezee;
+    font-weight: bold;
+    color: white;
+}
+
+.project_subtitle{
+    padding-bottom: 15px;
+    color: #7292dd;
+}
+
+.project_paragraph {}
+
+p {
+    font-size: 100%;
+    padding-bottom: 6px;
+    color: #a6abb8;
+}
+
+
+
+
 
 /* Banner Pages --------------------------------------------------------------------  */
 
@@ -236,7 +276,7 @@ h4 {
         padding: var(--mobile-info-item-padding);
     }
 
-    .banner-item{
+    .banner-item {
         height: var(--mobile-banner-item-height);
     }
 }
@@ -247,7 +287,7 @@ h4 {
         padding: var(--mobile-info-item-padding);
     }
 
-    .banner-item{
+    .banner-item {
         height: var(--mobile-banner-item-height);
     }
 }

@@ -11,10 +11,6 @@
   box-sizing: border-box;
 }
 
-
-
-/* ENTFERNT: body styles - die kommen jetzt aus styles.css */
-
 .page-home {
   color: #fff;
   flex-flow: column;

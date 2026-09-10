@@ -2,6 +2,8 @@
 
 /* ===== custom fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
 
 body {
     user-select: none;
@@ -36,22 +38,22 @@ body {
 
     /* =====  MAIN WRAPPER STYLES ===== */
     --padding-nav-main-wrapper-desktop: 0 0 0 0;
-    --margin-nav-main-wrapper-desktop: 0 0 15px 0;
-    --gap-nav-main-wrapper-desktop: 5px;
+    --margin-nav-main-wrapper-desktop: 0 0 20px 0;
+    --gap-nav-main-wrapper-desktop: 8px;
     
     --padding-nav-main-wrapper-mobile: 0 0 3vh 0;
     --margin-nav-main-wrapper-mobile: 0 0 0 0;
-    --gap-nav-main-wrapper-mobile: 0;
+    --gap-nav-main-wrapper-mobile: 1vh;
 
 
     /* ===== MAIN LINK STYLES ===== */
-    --font-mainlink: "Quicksand", sans-serif;
+    --font-mainlink: abeezee;
     --color-mainlink: white;
     --color-mainlink-hover: #bdbdbd;
 
     /* Desktop Font */
     --fontsize-mainlink-desktop: 20px;
-    --fontweight-mainlink-desktop: 600;
+    --fontweight-mainlink-desktop: 400;
     --fontstyle-mainlink-desktop: normal;
     --letterspacing-mainlink-desktop: normal;
     --wordspacing-mainlink-desktop: normal;
@@ -60,7 +62,7 @@ body {
 
     /* Mobile Font */
     --fontsize-mainlink-mobile: 3svh;
-    --fontweight-mainlink-mobile: 600;
+    --fontweight-mainlink-mobile: 400;
     --fontstyle-mainlink-mobile: normal;
     --letterspacing-mainlink-mobile: normal;
     --wordspacing-mainlink-mobile: normal;
