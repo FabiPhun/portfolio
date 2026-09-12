@@ -4,14 +4,15 @@
 
 :root {
     --body-background-color: #1b1b29;
-    --desktop-body-item-wrapper-padding: 3% 10% 0% 10%;
-    ;
+    --desktop-body-content-container-padding: 3% 0 0 0;
     --mobile-body-item-wrapper-padding: 10% 5% 0% 5%;
 
     --mobile-info-item-width: 100%;
     --mobile-info-item-padding: 20px 20px 20px 20px;
 
     --mobile-banner-item-height: 60vw;
+
+    --card-transition-speed: .25s;
 }
 
 /* !!--------------------------------------Advanced Settings--------------------------------------- */
@@ -33,14 +34,22 @@ body {
 }
 
 .body_content {
-    flex: 1;
-    min-width: 0;
+    width: 100%;
+    max-width: 63.5vw; 
+    margin-left: auto;
+    margin-right: auto;
+    
     padding: var(--desktop-body-content-container-padding);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     animation: fadeIn 0.8s ease-in;
-    overflow-x: hidden;
+}
+
+@media screen and (max-width: 991px) {
+    .body_content {
+        max-width: 100%;
+    }    
 }
 
 @keyframes fadeIn {
@@ -129,17 +138,12 @@ h4 {
 
 /* Cards --------------------------------------------------------------------  */
 
+
 .card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 30px;
-    row-gap: 60px;
-}
-
-/* This ensures the first two cards take up 1.5 columns each */
-.card-container a:first-child,
-.card-container a:nth-child(2) {
-    grid-column: span 1.5;
+    row-gap: 2vw;
+    column-gap: 2vw;
 }
 
 /* All other cards default to span 1 (one column) */
@@ -147,12 +151,15 @@ h4 {
     grid-column: span 1;
 }
 
-/* Your existing card styles remain the same */
 .card-item {
+    padding-right: 1.2vw;
+}
+
+/* Your existing card styles remain the same */
+.card-image-item {
     position: relative;
     aspect-ratio: 16/9;
     cursor: pointer;
-    overflow: hidden;
     align-items: center;
     justify-content: center;
     align-self: center;
@@ -162,40 +169,128 @@ h4 {
     position: absolute;
     width: 100%;
     height: 100%;
+    left: 0;
     background-size: cover;
     background-position: center;
-    z-index: -1;
-    transition: .5s;
+    transition: var(--card-transition-speed);
+    border-radius: .25vw;
+    rotate: 0deg;
+
+    box-shadow: .26vw .1vw .5vw rgba(0, 0, 0, 0.432);
 }
 
-.title-card {
+.card-1 {
+    width: 100%;
+    height: 100%;
+    top: .1vw;
+    left: .5vw;
+    rotate: 0.5deg;
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 20%;
-    background-color: #1d1d255b;
+    aspect-ratio: 16/9;
+    background-color: magenta;
+    transition: var(--card-transition-speed);
+    z-index: -1;
+    border-radius: .25vw;
+    box-shadow: .26vw .1vw .5vw rgba(0, 0, 0, 0.432);
+}
+
+.card-2 {
+    width: 100%;
+    height: 100%;
+    top: .25vw;
+    left: 1vw;
+    rotate: 1deg;
+    position: absolute;
+    aspect-ratio: 16/9;
+    background-color: rgb(25, 0, 255);
+    transition: var(--card-transition-speed);
+    z-index: -2;
+    border-radius: .25vw;
+}
+
+.card-title-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(3px);
+    cursor: default;
+    padding-bottom: .5vw;
 }
 
 .card-text {
-    color: #b3b3b3;
-    font-size: 0.65vw;
-    font-family: "Quicksand", sans-serif;
+    color: #7292dd;
+    font-family: "abeezee";
     font-weight: 600;
+    font-size: .7vw;
     text-transform: uppercase;
     text-align: center;
     transition: .2s;
 }
 
-.card-item:hover .card-img,
-.card-item:hover .card-text {
-    transform: scale(1.05);
+#card-2-row {
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 2vw;
 }
 
+@media screen and (max-width:991px) {
+    #card-2-row {
+        padding-bottom: 8vw;
+    }
+}
+
+@media screen and (min-width:991px) {
+    .card-image-item:hover .card-img {
+        rotate: -1deg;
+        left: -0.25vw;
+    }
+
+    .card-image-item:hover .card-1 {
+        top: .6vw;
+        left: .9vw;
+        rotate: 1deg;
+    }
+
+    .card-image-item:hover .card-2 {
+        top: 1vw;
+        left: 1.8vw;
+        rotate: 2deg;
+    }
+}
+
+@media screen and (max-width:991px) {
+
+    .card-item {
+        padding-right: 4vw;
+        padding-left: 0.5vw;
+    }
+
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 8vw;
+        column-gap: 5vw;
+    }
+
+    .card-img {
+        rotate: -1deg;
+        left: -0.5vw;
+    }
+
+    .card-1 {
+        top: 1.2vw;
+        left: 1.5vw;
+        rotate: 1deg;
+    }
+
+    .card-2 {
+        top: 2vw;
+        left: 3.5vw;
+        rotate: 2deg;
+    }
+
+    .card-text {
+        font-size: 2vw;
+        padding-bottom: 2v;
+    }
+}
 
 /* Project Items  --------------------------------------------------------------------  */
 
@@ -204,10 +299,10 @@ h4 {
     flex: 0 auto;
     width: 100%;
     font-family: Quicksand;
-    background-color: green;
+    background-color: rgb(58, 57, 57);
 }
 
-.project_text_item{
+.project_text_item {
     padding: 50px;
 }
 
@@ -218,12 +313,10 @@ h4 {
     color: white;
 }
 
-.project_subtitle{
+.project_subtitle {
     padding-bottom: 15px;
     color: #7292dd;
 }
-
-.project_paragraph {}
 
 p {
     font-size: 100%;
@@ -233,10 +326,7 @@ p {
 
 
 
-
-
 /* Banner Pages --------------------------------------------------------------------  */
-
 
 
 .banner-item {
