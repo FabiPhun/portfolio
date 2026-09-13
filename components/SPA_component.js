@@ -230,6 +230,76 @@
 
     window.navigateTo = navigateTo;
 
+    // ============================================
+    // GLOBAL LINK HANDLER (delegiert)
+    // Fängt ALLE internen Links ab, auch in Inhalten
+    // ============================================
+    document.addEventListener('click', function (e) {
+        // Nur Links, die wirklich <a> sind
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        // Externe Links, Anker, mailto, tel, target="_blank" ignorieren
+        if (
+            href.startsWith('http://') ||
+            href.startsWith('https://') ||
+            href.startsWith('mailto:') ||
+            href.startsWith('tel:') ||
+            href.startsWith('#') ||
+            link.getAttribute('target') === '_blank' ||
+            link.hasAttribute('download')
+        ) {
+            return;
+        }
+
+        // SPA-Modus nur, wenn Body das Attribut hat
+        if (!document.body.hasAttribute('data-spa-mode')) return;
+
+        // data-page hat Vorrang, sonst aus href ableiten
+        let page = link.getAttribute('data-page');
+
+        if (!page) {
+            // Pfad -> page-Key umkehren (aus pageMap)
+            const cleanHref = href.split('#')[0].split('?')[0];
+            for (const key in pageMap) {
+                if (pageMap[key] === cleanHref) {
+                    page = key;
+                    break;
+                }
+            }
+            // Fallback: Dateiname ohne .html
+            if (!page) {
+                const fileName = cleanHref.split('/').pop().replace('.html', '');
+                page = fileName === 'portfolio' ? 'portfolio' : fileName;
+            }
+        }
+
+        // Wenn Seite unbekannt -> normal navigieren (Fallback)
+        if (!page || !pageMap[page]) {
+            return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Mobile Menü schließen falls offen
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
+        // Zur SPA-Navigation dispatchen
+        document.dispatchEvent(new CustomEvent('navigate', {
+            detail: { page: page }
+        }));
+    });
+
     const hash = location.hash.replace('#', '');
     const bodyContent = document.querySelector('.body_content');
 
