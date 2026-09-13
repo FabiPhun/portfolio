@@ -197,13 +197,18 @@ h4 {
 
 .card-text {
     color: #a6abb8;
-    font-family: "abeezee";
+    font-family: "quicksand";
     font-weight: 600;
-    font-size: .6vw;
+    font-size: .8vw;
+    letter-spacing: 0.32w;
     text-transform: uppercase;
     text-align: center;
     transition: .2s;
 }
+
+    #card-container-column{
+        grid-template-columns: repeat(2,1fr);
+    }
 
 /* ---------------- Presenter Cards -------------------- */
 
@@ -386,9 +391,13 @@ p {
     }
 
     .card-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         row-gap: 8vw;
         column-gap: 5vw;
+    }
+
+    #card-container-column{
+        grid-template-columns: repeat(1,1fr);
     }
 
     .card-img {
@@ -409,7 +418,7 @@ p {
     }
 
     .card-text {
-        font-size: 2vw;
+        font-size: 2.8vw;
     }
 
     .card-title-item {
