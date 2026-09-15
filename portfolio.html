@@ -1,87 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="portfolio/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="portfolio/styles.css" />
+  <link rel="stylesheet" href="portfolio/customisation.css" />
 </head>
 
 <body data-spa-mode="true">
-    <!-- NAVBAR - Permanent -->
-    <div id="navbar-container" data-directory-fix="/"></div>
+  <div id="navbar-container" data-directory-fix="/"></div>
 
-    <!-- CONTENT AREA - Wird ausgetauscht -->
-    <div class="body_content">
+  <div class="body_content">
 
-        <div class="body_item_wrapper">
-            <div class="body_item">
-
-                <a class="card-container" id="card-present" href="/portfolio/storyboards.html" data-page="storyboards"
-                    style="text-decoration: none;">
-                    <div class="card-item">
-
-                        <div class="card-image-item">
-                            <div class="card-img"
-                                style=" background-image: url(../images/storyboards/avatar/aang_1.png);"></div>
-                            <div class="card-1"
-                                style=" background-image: url(../images/storyboards/avatar/aang_2.png);"></div>
-                            <div class="card-2"
-                                style=" background-image: url(../images/storyboards/avatar/aang_3.png);"></div>
-                        </div>
-
-                    </div>
-
-                    <div class="project_item" id="presenter-project">
-                        <div class="project_text_item">
-                            <p class="project_header" style="color: #ffbae6;">Storyboarding</p>
-                            <div class="project_paragraph">
-                                <p class="project_subtitle" id="presenter-project-subtitle">
-                                    <em style="color: #ff77fa;">As of now, I mostly do side projects or freelance work.</em>
-                                </p>
-                                <p id="presenter-project-p">Some of my previous experiences included
-                                    storyboarding, thumbnails' and quick revisions of storyboards created by my
-                                    collegues.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </a>
+    <div class="body_item_wrapper">
+      <div class="body_item">
+        <a class="card-container" id="showcase-card" href="/portfolio/storyboards.html" data-page="storyboards">
+          <div class="card-item">
+            <div class="card-image-item">
+              <div class="card-img" style="
+                    background-image: url(../images/storyboards/avatar/aang_1.png);
+                  "></div>
+              <div class="card-1" style="
+                    background-image: url(../images/storyboards/avatar/aang_2.png);
+                  "></div>
+              <div class="card-2" style="
+                    background-image: url(../images/storyboards/avatar/aang_3.png);
+                  "></div>
             </div>
+          </div>
 
-        </div>
-
-        <div class="body_item_wrapper">
-            <div class="body_item" id="project-body">
-                <a class="project_item" href="/portfolio/icarus.html" data-page="icarus">
-                    <div class="project_text_item">
-                        <p class="project_header" style="
-                            
-                                background: #FFFFFF;
-                                background: linear-gradient(to right, #FF0D5E 1%, #F1F1F1 45%);
-                                background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                            
-                            ">Icarus</p>
-                        <div class="project_paragraph">
-                            <p class="project_subtitle">
-                                <em>All rights go to ©ChloeS. and ©FabianF.</em>
-                            </p>
-                            <p><em style="color: #f86885;">"Looks mean nothing without great gameplay."</em>
-                            </p>
-                            <p>An open-world game Prototype a friend and I are working on.</p>
-                            <p>Currently in the R&D phase, which we'll continue until the game is incredibly fun.</p>
-                        </div>
-                    </div>
-                </a>
+          <div class="project_item" id="showcase-info">
+            <div class="project_text_item">
+              <p class="project_header" id="showcase-title">Storyboarding</p>
+              <div class="project_paragraph" id="showcase-paragraph">
+                <p class="project_subtitle" id="showcase-subtitle">
+                  <em>As of now, I mostly do side projects or freelance
+                    work.</em>
+                </p>
+                <p id="showcase-tagline">
+                  Some of my previous work included storyboarding,
+                  thumbnails' and quick revisions of storyboards created by my
+                  collegues.
+                </p>
+              </div>
             </div>
-        </div>
-
+          </div>
+        </a>
+      </div>
     </div>
 
-    <script src="components/navbar/navbar.js"></script>
-    <script src="components/SPA_component.js"></script>
+    <div class="body_item_wrapper">
+      <div class="body_item" id="icarus-panel">
+        <a class="project_item" href="/portfolio/icarus.html" data-page="icarus">
+          <div class="project_text_item">
+            <p class="project_header" id="icarus-title">Icarus</p>
+            <div class="project_paragraph">
+              <p class="project_subtitle">
+                <em>All rights go to ©ChloeS. and ©FabianF.</em>
+              </p>
+              <p>
+                <em id="icarus-tagline">"Looks mean nothing without great gameplay."</em>
+              </p>
+              <p>
+                An open-world game Prototype a friend and I are working on.
+              </p>
+              <p>
+                Currently in the R&D phase, which we'll continue until the
+                game is incredibly fun.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="body_item_wrapper">
+      <div class="body_item">
+        <div id="category-grid">
+
+          <a class="project_item grid-panel" id="animation-panel" href="portfolio/animation.html" data-page="animation">
+            <p class="project_header" id="grid-title">Animation</p>
+          </a>
+
+          <a class="project_item grid-panel" href="portfolio/animation.html" data-page="animation">
+            <p class="project_header" id="grid-title">Modelling and Rigging</p>
+          </a>
+
+          <a class="project_item grid-panel" href="portfolio/animation.html" data-page="animation">
+            <p class="project_header" id="grid-title">Character Design</p>
+          </a>
+
+          <a class="project_item grid-panel" href="portfolio/animation.html" data-page="animation">
+            <p class="project_header" id="grid-title">Programming</p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="components/navbar/navbar.js"></script>
+  <script src="components/SPA_component.js"></script>
 </body>
 
 </html>

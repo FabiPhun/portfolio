@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "handwriting";
+  src: url("../fonts/Handwriting.ttf") format("truetype");
+}
+
+/* ===================== Showcase-Card ===================== */
+
+#showcase-card {
+  grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 0;
+  background: #393b47;
+  border-radius: .4vw;
+}
+
+#showcase-info {
+  background: none;
+}
+
+/* #showcase-paragraph {
+} */
+
+#showcase-title {
+  color: white;
+}
+
+/* #showcase-subtitle {
+  color: white;
+} */
+
+#showcase-tagline {
+  color: white;
+}
+
+@media screen and (max-width: 991px) {
+  #showcase-card {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* ===================== Icarus-Panel ===================== */
+
+#icarus-panel {
+  background-image: url(/images/misc/MenuArt.png);
+  background-position: 35% 55%;
+  background-size: 250%;
+  background-blend-mode: multiply;
+  transition: 0.8s;
+  border-radius: .4vw;
+}
+
+#icarus-panel:hover {
+  background-size: 260%;
+  cursor: pointer;
+}
+
+#icarus-title {
+  background: #ffffff;
+  background: linear-gradient(to right, #ff0d5e 1%, #f1f1f1 45%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#icarus-tagline {
+  color: #f86885;
+}
+
+/* ===================== Storyboard-Gallery ===================== */
+
+#gallery-two-column {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (max-width: 991px) {
+  #gallery-two-column {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* ===================== Animation-Panel ===================== */
+
+#category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-bottom: .7vw;
+  border-radius: .4vw;
+}
+
+#grid-title {
+  font-size: 1vw;
+  text-align: center;
+}
+
+.grid-panel {
+  justify-content: center;
+  align-items: center;
+  padding: 20%;
+}
+
+#animation-panel {
+  background-image: url(/images/animation/sonic.png);
+  background-blend-mode: darken;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0% 50%;
+}
+
+@media screen and (max-width: 991px) {
+  #category-grid {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0;
+    padding-bottom: 0;
+  }
+
+  .grid-panel {
+    padding: 5%;
+  }
+
+  #grid-title {
+    font-size: 200%;
+    padding: 0%;
+  }
+
+  #animation-panel {
+    background-size: 100%;
+  }
+}
