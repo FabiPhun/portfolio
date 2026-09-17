@@ -1,9 +1,10 @@
 /* !!--------------------------------------Styling Settings---------------------------------------!! */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Caveat:wght@400..700&display=swap');
 
 :root {
-  --body-background-color: #1b1b29;
+  --body-background-color: #161619;
   --desktop-body-content-container-padding: 3% 0 0 0;
   --mobile-body-content-container-padding: 10% 5% 0% 5%;
 
@@ -55,6 +56,11 @@ body {
   to {
     opacity: 1;
   }
+}
+
+.divider {
+  width: 100%;
+  border-bottom: solid 1px #40435e;
 }
 
 /* !!---------------------------------------------------------------------------------------------!! */
@@ -213,11 +219,9 @@ h4 {
   width: 100%;
   font-family: Quicksand;
   background: #141414;
-  background: linear-gradient(
-    119deg,
-    rgb(20, 20, 20) 0%,
-    rgba(255, 255, 255, 0) 60%
-  );
+  background: linear-gradient(119deg,
+      rgb(20, 20, 20) 0%,
+      rgba(255, 255, 255, 0) 60%);
 }
 
 .project_text_item {
@@ -383,11 +387,9 @@ p {
     flex: 0 auto;
     width: 100%;
     font-family: Quicksand;
-    background: linear-gradient(
-    119deg,
-    rgb(20, 20, 20) 0%,
-    rgba(255, 255, 255, 0) 150%
-  );
+    background: linear-gradient(119deg,
+        rgb(20, 20, 20) 0%,
+        rgba(255, 255, 255, 0) 150%);
   }
 
   .project_text_item {

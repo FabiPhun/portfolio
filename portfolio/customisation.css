@@ -3,6 +3,8 @@
   src: url("../fonts/Handwriting.ttf") format("truetype");
 }
 
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Caveat:wght@400..700&display=swap');
+
 /* ===================== Showcase-Card ===================== */
 
 #showcase-card {

@@ -2,7 +2,7 @@
 // NAVBAR - COMPLETE FIXED VERSION
 // ============================================
 
-(function() {
+(function () {
     'use strict';
 
     // ---------- PATH DETECTION ----------
@@ -154,18 +154,18 @@
     // ---------- SETUP NAV LINKS ----------
     function setupNavLinks() {
         // Check if we're in SPA mode
-        const isSPA = document.body.hasAttribute('data-spa-mode') || 
-                      window.location.pathname.includes('/portfolio/') ||
-                      window.location.pathname.includes('portfolio.html');
+        const isSPA = document.body.hasAttribute('data-spa-mode') ||
+            window.location.pathname.includes('/portfolio/') ||
+            window.location.pathname.includes('portfolio.html');
 
         // Get all nav links
         const links = document.querySelectorAll('.nav-main-section-link, .nav-category-link, .nav-category-sublink');
-        
+
         links.forEach(link => {
             // Remove old listeners
             link.removeEventListener('click', navLinkHandler);
             link.removeEventListener('click', spaNavLinkHandler);
-            
+
             // Add appropriate listener
             if (isSPA) {
                 link.addEventListener('click', spaNavLinkHandler);
@@ -189,7 +189,7 @@
                 const parts = href.split('/');
                 const fileName = parts[parts.length - 1];
                 page = fileName.replace('.html', '');
-                
+
                 // Handle special cases
                 if (page === 'index' || page === 'portfolio') {
                     page = 'portfolio';
@@ -222,7 +222,7 @@
         }
 
         // Dispatch navigation event
-        document.dispatchEvent(new CustomEvent('navigate', { 
+        document.dispatchEvent(new CustomEvent('navigate', {
             detail: { page: page }
         }));
     }
@@ -232,7 +232,7 @@
         e.preventDefault();
 
         const targetFile = this.getAttribute('href');
-        
+
         if (targetFile.startsWith('http') || targetFile.startsWith('www')) {
             window.location.href = targetFile.startsWith('www') ? 'https://' + targetFile : targetFile;
             return;
@@ -240,7 +240,7 @@
 
         const navbarContainer = document.getElementById('navbar-container');
         let baseDir = navbarContainer?.getAttribute('directoryFix') || '';
-        
+
         let fullPath = baseDir + targetFile;
         window.location.href = fullPath;
     }
@@ -328,7 +328,7 @@
                 if (basePadding) {
                     const paddingParts = basePadding.split(' ');
                     let newPadding;
-                    
+
                     if (paddingParts.length === 3) {
                         newPadding = `calc(${navHeight}px + ${paddingParts[0]}) ${paddingParts[1]} ${paddingParts[2]} ${paddingParts[1]}`;
                     } else if (paddingParts.length === 4) {
@@ -375,12 +375,12 @@
     }
 
     // ---------- INIT ----------
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const navbarDir = getNavbarPath();
         if (!navbarDir) return;
 
         loadNavbarCSS(navbarDir);
-        loadNavbarHTML(navbarDir, function() {
+        loadNavbarHTML(navbarDir, function () {
             initNavigation();
         });
     });
@@ -390,7 +390,7 @@
         const navbarDir = getNavbarPath();
         if (navbarDir) {
             loadNavbarCSS(navbarDir);
-            loadNavbarHTML(navbarDir, function() {
+            loadNavbarHTML(navbarDir, function () {
                 initNavigation();
             });
         }

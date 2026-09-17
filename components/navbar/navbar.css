@@ -19,7 +19,7 @@ body {
   --transition-menu: 0.3s ease;
 
   /* ===== NAVBAR LAYOUT ===== */
-  --nav-bg: #202233;
+  --nav-bg: #191a22;
   --mobile-header-bg: #474c81;
   --color-overlay: rgba(0, 0, 0, 0.5);
 
@@ -44,7 +44,7 @@ body {
   /* ===== MAIN LINK STYLES ===== */
   --font-mainlink: quicksand;
   --color-mainlink: white;
-  --color-mainlink-hover: #bdbdbd;
+  --color-mainlink-hover: #cacaca;
 
   /* Desktop Font */
   --fontsize-mainlink-desktop: 20px;
@@ -52,7 +52,7 @@ body {
   --fontstyle-mainlink-desktop: normal;
   --letterspacing-mainlink-desktop: normal;
   --wordspacing-mainlink-desktop: normal;
-  --texttransform-mainlink-desktop: uppercase;
+  --texttransform-mainlink-desktop: normal;
   --lineheight-mainlink-desktop: 1;
 
   /* Mobile Font */
@@ -148,6 +148,11 @@ body {
 }
 
 /* !!-------------------------------------- ADVANCED SETTING ---------------------------------------!! */
+
+#nav-category-link-hover{
+  pointer-events: none;
+  cursor: default;
+}
 
 /* !!--------------------------------------DESKTOP STYLES---------------------------------------!! */
 .main-nav {
