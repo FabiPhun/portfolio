@@ -5,16 +5,19 @@
 (function () {
     'use strict';
 
+    const HOME_PAGE = '/index.html';
+    const PORTFOLIO_PAGE = '/index.html';
+
     const pageMap = {
-        'home': '/index.html',
+        'home': HOME_PAGE,
         'about': '/aboutme.html',
         'resume': '/resume.html',
         'graphical-design': '/portfolio/graphical_design.html',
-        'gd-smmk': '/portfolio/gd/gd_smmk.html',
-        'gd-animal-crossing': '/portfolio/gd/gd_animal_crossing.html',
-        'gd-odd-print': '/portfolio/gd/gd_odd_print.html',
-        'gd-bees': '/portfolio/gd/gd_bees.html',
-        'gd-miscellaneous': '/portfolio/gd/gd_miscellaneous.html',
+        'gd-smmk': '/portfolio/graphical-design/gd_smmk.html',
+        'gd-animal-crossing': '/portfolio/graphical-design/gd_animal_crossing.html',
+        'gd-odd-print': '/portfolio/graphical-design/gd_odd_print.html',
+        'gd-bees': '/portfolio/graphical-design/gd_bees.html',
+        'gd-miscellaneous': '/portfolio/graphical-design/gd_miscellaneous.html',
         'animation': '/portfolio/animation.html',
         'animation-was': '/portfolio/animation/animation_was.html',
         'animation-animschool': '/portfolio/animation/animation_animschool.html',
@@ -32,6 +35,32 @@
         'programming': '/portfolio/programming.html'
     };
 
+    // ============================================
+    // Datei-Pfad -> URL
+    // /portfolio/graphical-design/gd_smmk.html -> /graphical-design/gd-smmk
+    // /portfolio/graphical_design.html         -> /graphical-design
+    // /aboutme.html                            -> /aboutme
+    // ============================================
+    function fileToUrl(file) {
+        if (!file || file === HOME_PAGE || file === PORTFOLIO_PAGE) return '/';
+        let url = file.replace(/\.html$/, '');   // .html weg
+        url = url.replace(/^\/portfolio/, '');   // /portfolio weg
+        url = url.replace(/_/g, '-');            // _ -> -
+        if (!url.startsWith('/')) url = '/' + url;
+        return url;
+    }
+
+    const pageToUrl  = {};
+    const urlToPage  = {};
+    const fileToPage = {};
+
+    Object.keys(pageMap).forEach(function (key) {
+        const url = fileToUrl(pageMap[key]);
+        pageToUrl[key] = url;
+        urlToPage[url] = key;
+        fileToPage[pageMap[key]] = key;
+    });
+
     let galleryLoaded = false;
 
     function loadGallery(callback) {
@@ -39,7 +68,6 @@
             if (callback) callback();
             return;
         }
-
         const script = document.createElement('script');
         script.src = 'components/gallery_component.js';
         script.onload = function () {
@@ -55,12 +83,10 @@
 
     function waitForEverything(callback) {
         let checks = 3;
-        
+
         function done() {
             checks--;
-            if (checks === 0) {
-                callback();
-            }
+            if (checks === 0) callback();
         }
 
         const scripts = document.querySelectorAll('.body_content script');
@@ -123,14 +149,9 @@
     }
 
     function showContent(bodyContent) {
-        // Make it visible but transparent
         bodyContent.style.display = 'block';
         bodyContent.style.opacity = '0';
-        
-        // Force reflow
         void bodyContent.offsetHeight;
-        
-        // Fade in
         bodyContent.style.transition = 'opacity 0.4s ease';
         bodyContent.style.opacity = '1';
     }
@@ -142,7 +163,7 @@
 
     function navigateTo(page) {
         if (!page || page === 'portfolio' || page === '') {
-            window.location.href = '/portfolio.html';
+            window.location.href = PORTFOLIO_PAGE;
             return;
         }
 
@@ -158,9 +179,7 @@
         }
 
         const bodyContent = document.querySelector('.body_content');
-        if (bodyContent) {
-            hideContent(bodyContent);
-        }
+        if (bodyContent) hideContent(bodyContent);
 
         fetch(targetPath)
             .then(response => response.text())
@@ -175,12 +194,13 @@
                 }
 
                 bodyContent.innerHTML = content.innerHTML;
-                history.pushState({ page: page }, '', '#' + page);
+
+                // ---- URL automatisch aus Datei-Pfad ----
+                history.pushState({ page: page }, '', pageToUrl[page] || '/');
 
                 const title = doc.querySelector('title');
                 if (title) document.title = title.textContent;
 
-                // Keep hidden while loading
                 bodyContent.style.display = 'none';
                 bodyContent.style.opacity = '0';
 
@@ -196,20 +216,12 @@
                 const hasGalleries = bodyContent.querySelectorAll('.gallery_wrapper').length > 0;
                 if (hasGalleries) {
                     loadGallery(function () {
-                        if (window.reinitGalleries) {
-                            window.reinitGalleries();
-                        }
-                        waitForEverything(() => {
-                            showContent(bodyContent);
-                        });
+                        if (window.reinitGalleries) window.reinitGalleries();
+                        waitForEverything(() => showContent(bodyContent));
                     });
                 } else {
-                    if (galleryLoaded && window.removeGalleries) {
-                        window.removeGalleries();
-                    }
-                    waitForEverything(() => {
-                        showContent(bodyContent);
-                    });
+                    if (galleryLoaded && window.removeGalleries) window.removeGalleries();
+                    waitForEverything(() => showContent(bodyContent));
                 }
 
                 window.scrollTo(0, 0);
@@ -225,24 +237,22 @@
     });
 
     window.addEventListener('popstate', function (e) {
-        navigateTo(e.state?.page || 'portfolio');
+        const page = e.state?.page || urlToPage[location.pathname] || 'portfolio';
+        navigateTo(page);
     });
 
     window.navigateTo = navigateTo;
 
     // ============================================
-    // GLOBAL LINK HANDLER (delegiert)
-    // Fängt ALLE internen Links ab, auch in Inhalten
+    // GLOBAL LINK HANDLER
     // ============================================
     document.addEventListener('click', function (e) {
-        // Nur Links, die wirklich <a> sind
         const link = e.target.closest('a');
         if (!link) return;
 
         const href = link.getAttribute('href');
         if (!href) return;
 
-        // Externe Links, Anker, mailto, tel, target="_blank" ignorieren
         if (
             href.startsWith('http://') ||
             href.startsWith('https://') ||
@@ -255,37 +265,40 @@
             return;
         }
 
-        // SPA-Modus nur, wenn Body das Attribut hat
         if (!document.body.hasAttribute('data-spa-mode')) return;
 
-        // data-page hat Vorrang, sonst aus href ableiten
         let page = link.getAttribute('data-page');
 
         if (!page) {
-            // Pfad -> page-Key umkehren (aus pageMap)
             const cleanHref = href.split('#')[0].split('?')[0];
-            for (const key in pageMap) {
-                if (pageMap[key] === cleanHref) {
-                    page = key;
-                    break;
-                }
+
+            // 1) Datei-Match
+            if (fileToPage[cleanHref]) {
+                page = fileToPage[cleanHref];
             }
-            // Fallback: Dateiname ohne .html
-            if (!page) {
+            // 2) URL-Match
+            else if (urlToPage[cleanHref]) {
+                page = urlToPage[cleanHref];
+            }
+            else if (urlToPage[cleanHref + '/']) {
+                page = urlToPage[cleanHref + '/'];
+            }
+            // 3) Fallback: Dateiname ohne .html
+            else {
                 const fileName = cleanHref.split('/').pop().replace('.html', '');
-                page = fileName === 'portfolio' ? 'portfolio' : fileName;
+                if (fileName === 'index' || cleanHref === PORTFOLIO_PAGE) {
+                    page = 'portfolio';
+                } else if (pageMap[fileName]) {
+                    page = fileName;
+                }
             }
         }
 
-        // Wenn Seite unbekannt -> normal navigieren (Fallback)
-        if (!page || !pageMap[page]) {
-            return;
-        }
+        if (!page || !pageMap[page]) return;
 
         e.preventDefault();
         e.stopPropagation();
 
-        // Mobile Menü schließen falls offen
         const mobileMenu = document.getElementById('mobileMenu');
         if (mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
@@ -294,40 +307,38 @@
             document.body.classList.remove('menu-open');
         }
 
-        // Zur SPA-Navigation dispatchen
         document.dispatchEvent(new CustomEvent('navigate', {
             detail: { page: page }
         }));
     });
 
-    const hash = location.hash.replace('#', '');
+    // ============================================
+    // INITIAL LOAD
+    // ============================================
     const bodyContent = document.querySelector('.body_content');
 
     if (bodyContent) {
-        // Start hidden
         hideContent(bodyContent);
-        
         const hasGalleries = document.querySelectorAll('.gallery_wrapper').length > 0;
-        
         if (hasGalleries) {
             loadGallery(function () {
-                if (window.reinitGalleries) {
-                    window.reinitGalleries();
-                }
-                waitForEverything(() => {
-                    showContent(bodyContent);
-                });
+                if (window.reinitGalleries) window.reinitGalleries();
+                waitForEverything(() => showContent(bodyContent));
             });
         } else {
-            waitForEverything(() => {
-                showContent(bodyContent);
-            });
+            waitForEverything(() => showContent(bodyContent));
         }
     }
 
-    if (hash && !window.location.pathname.includes('/portfolio/')) {
+    const initialPath = location.pathname.replace(/\/$/, '') || '/';
+    if (
+        initialPath !== '/' &&
+        initialPath !== '/index.html' &&
+        !initialPath.includes('/portfolio/') &&
+        urlToPage[initialPath]
+    ) {
         setTimeout(function () {
-            navigateTo(hash);
+            navigateTo(urlToPage[initialPath]);
         }, 300);
     }
 
