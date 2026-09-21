@@ -1,5 +1,5 @@
 // ============================================
-// SPA ROUTER WITH FADE-IN
+// SPA ROUTER WITH FADE-IN (HASH-ROUTING)
 // ============================================
 
 (function () {
@@ -27,6 +27,7 @@
         'storyboards-was': '/portfolio/storyboards/storyboards_was.html',
         'storyboards-christmas': '/portfolio/storyboards/storyboards_christmas.html',
         'storyboards-miscellaneous': '/portfolio/storyboards/storyboards_miscellaneous.html',
+        'storyboard-atla': '/portfolio/storyboards/storyboard_atla.html',
         'icarus': '/portfolio/icarus.html',
         'icarus-gdd': '/portfolio/icarus/icarus_gdd.html',
         'modelling': '/portfolio/modelling_and_rigging.html',
@@ -37,17 +38,17 @@
 
     // ============================================
     // Datei-Pfad -> URL
-    // /portfolio/graphical-design/gd_smmk.html -> /graphical-design/gd-smmk
-    // /portfolio/graphical_design.html         -> /graphical-design
-    // /aboutme.html                            -> /aboutme
+    // /portfolio/graphical-design/gd_smmk.html -> #/graphical-design/gd-smmk
+    // /portfolio/graphical_design.html         -> #/graphical-design
+    // /aboutme.html                            -> #/aboutme
     // ============================================
     function fileToUrl(file) {
-        if (!file || file === HOME_PAGE || file === PORTFOLIO_PAGE) return '/';
-        let url = file.replace(/\.html$/, '');   // .html weg
-        url = url.replace(/^\/portfolio/, '');   // /portfolio weg
-        url = url.replace(/_/g, '-');            // _ -> -
+        if (!file || file === HOME_PAGE || file === PORTFOLIO_PAGE) return '#/';
+        let url = file.replace(/\.html$/, '');
+        url = url.replace(/^\/portfolio/, '');
+        url = url.replace(/_/g, '-');
         if (!url.startsWith('/')) url = '/' + url;
-        return url;
+        return '#' + url;
     }
 
     const pageToUrl  = {};
@@ -195,8 +196,8 @@
 
                 bodyContent.innerHTML = content.innerHTML;
 
-                // ---- URL automatisch aus Datei-Pfad ----
-                history.pushState({ page: page }, '', pageToUrl[page] || '/');
+                // ---- URL mit Hash ----
+                history.pushState({ page: page }, '', pageToUrl[page] || '#/');
 
                 const title = doc.querySelector('title');
                 if (title) document.title = title.textContent;
@@ -236,8 +237,12 @@
         navigateTo(e.detail.page);
     });
 
-    window.addEventListener('popstate', function (e) {
-        const page = e.state?.page || urlToPage[location.pathname] || 'portfolio';
+    // ============================================
+    // Hash-Routing: hashchange statt popstate
+    // ============================================
+    window.addEventListener('hashchange', function () {
+        const hash = location.hash || '#/';
+        const page = urlToPage[hash] || 'portfolio';
         navigateTo(page);
     });
 
@@ -330,15 +335,13 @@
         }
     }
 
-    const initialPath = location.pathname.replace(/\/$/, '') || '/';
-    if (
-        initialPath !== '/' &&
-        initialPath !== '/index.html' &&
-        !initialPath.includes('/portfolio/') &&
-        urlToPage[initialPath]
-    ) {
+    // ============================================
+    // Initiale Route aus Hash lesen
+    // ============================================
+    const initialHash = location.hash || '#/';
+    if (initialHash !== '#/' && initialHash !== '#' && urlToPage[initialHash]) {
         setTimeout(function () {
-            navigateTo(urlToPage[initialPath]);
+            navigateTo(urlToPage[initialHash]);
         }, 300);
     }
 

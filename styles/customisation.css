@@ -5,12 +5,68 @@
 
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Caveat:wght@400..700&display=swap');
 
+
+/* ===================== Logo-Card ===================== */
+
+.signature-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+}
+
+.profile-image {
+  background-image: url(/images/other/character.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+#signature-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signature-image {
+  background-image: url(/images/unterschrift.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 80%;
+  aspect-ratio: 2 / 1;
+  margin-bottom: 5%;
+}
+
+
+.signature-paragraph {}
+
+#signature-title {
+  font-size: 20px;
+}
+
+#signature-tagline {
+  font-family: quicksand;
+  font-size: 14px;
+}
+
+/* ===================== Divider-Variants ===================== */
+
+#divider-gallery {
+  margin-bottom: 2.5%;
+  margin-top: 2.5%;
+}
+
+
 /* ===================== Showcase-Card ===================== */
 
 #showcase-card {
   grid-template-columns: repeat(2, 1fr);
   padding-bottom: 0;
-  background: #393b47;
+  background: #221e25;
   border-radius: .4vw;
 }
 
