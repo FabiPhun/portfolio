@@ -185,3 +185,13 @@
     background-size: 100%;
   }
 }
+
+/* ===================== Description-Item ===================== */
+
+.project-descripton{
+  padding: 0;
+}
+
+.descripton_paragraph{
+  line-height: 145%;
+}
