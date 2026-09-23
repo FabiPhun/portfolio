@@ -21,6 +21,15 @@
 
 /* !!--------------------------------------Advanced Settings--------------------------------------- */
 
+audio {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  width: 80%;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -100,10 +109,11 @@ h3 {
 
 h4 {
   color: #a6abb8;
-  font-size: 8px;
+  font-size: 14px;
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   text-align: center;
+  margin-bottom: 1vw;
 }
 
 .body_item {
@@ -295,7 +305,7 @@ p {
 }
 
 .open-timeline::after {
-  content: "▼";
+  content: "▲";
   display: inline-block;
   margin-left: 6px;
   font-size: 0.7em;
@@ -303,7 +313,7 @@ p {
 }
 
 .open-timeline.is-open::after {
-  transform: rotate(180deg);
+  content: "▼";
 }
 
 .timeline-section {
@@ -323,17 +333,19 @@ p {
 }
 
 #timeline {
-  /* rounded corners */
   --tl-border-radius: 2.5px;
 
-  /* Timeline-Line */
+  /* Achse: Linie UND Punkt hängen nur hieran */
+  --tl-axis: 0px;
   --tl-line-color: #474c81;
   --tl-line-width: 1px;
-  --tl-marker-size: 0.5vw;
+  --tl-marker-size: 10px;
 
-  /* Layout */
-  --tl-card-width: 45.16%;
-  --tl-card-gap: 6vw;
+  /* Layout (immer einspaltig) */
+  --tl-track-width: 70%;
+  --tl-card-offset: clamp(20px, 3vw, 50px);
+  /* Abstand Achse -> Karte */
+  --tl-card-gap: 2vw;
 
   /* Card – Header */
   --tl-heading-padding: 1vw 0 1vw 1vw;
@@ -349,53 +361,39 @@ p {
   --tl-text-font-weight: 600;
   --tl-text-size: 0.8vw;
   --tl-text-color: rgb(201, 200, 200);
-  --tl-card-content-background-color: #212435;
+  --tl-card-content-background-color: #1f2027;
 
   --tl-color-1: #4e2a2a;
-  --tl-color-2: #725c34;
-  --tl-color-3: #2a4e4c;
+  --tl-color-2: #8f713b;
+  --tl-color-3: #293c61;
   --tl-color-4: #472a4e;
-}
-
-#timeline .timeline-heading {
-  color: #1a1a1a;
-  margin-bottom: 20px;
-}
-
-#timeline .timeline-leader {
-  color: var(--tl-text-color);
-  max-width: 90%;
-  margin: 0 auto 45px;
-  text-align: center;
 }
 
 #timeline .timeline-track {
   position: relative;
-  max-width: calc(var(--tl-card-width) * 2 + var(--tl-card-gap));
+  max-width: var(--tl-track-width);
   margin: 0 auto;
 }
 
+/* Linie */
 #timeline .timeline-track::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%;
+  left: var(--tl-axis);
   width: var(--tl-line-width);
   background: var(--tl-line-color);
+  transform: translateX(-50%);
 }
 
 #timeline .timeline-card {
   position: relative;
-  width: var(--tl-card-width);
+  margin-left: var(--tl-card-offset);
 }
 
-#timeline .timeline-card:nth-child(odd) {
-  left: 0;
-}
-
-#timeline .timeline-card:nth-child(even) {
-  left: calc(var(--tl-card-width) + var(--tl-card-gap));
+#timeline .timeline-card:not(:last-child) {
+  margin-bottom: var(--tl-card-gap);
 }
 
 #timeline .timeline-card__head {
@@ -422,6 +420,19 @@ p {
   background: var(--tl-color-4);
 }
 
+/* Punkt: selbe Achse wie die Linie, vertikal mittig im Header */
+#timeline .timeline-card__head::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--tl-axis) - var(--tl-card-offset));
+  width: var(--tl-marker-size);
+  height: var(--tl-marker-size);
+  background: var(--tl-line-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #timeline .timeline-card__title {
   margin: 0;
   color: var(--tl-heading-text-color);
@@ -438,24 +449,6 @@ p {
   font-size: 0.8vw;
 }
 
-#timeline .timeline-card__head::before {
-  content: "";
-  position: absolute;
-  top: 30%;
-  width: var(--tl-marker-size);
-  height: var(--tl-marker-size);
-  background: var(--tl-line-color);
-  border-radius: 50%;
-}
-
-#timeline .timeline-card:nth-child(odd) .timeline-card__head::before {
-  right: calc(-1 * (var(--tl-card-gap) / 1.95) - (var(--tl-marker-size) / 2));
-}
-
-#timeline .timeline-card:nth-child(even) .timeline-card__head::before {
-  left: calc(-1 * (var(--tl-card-gap) / 2.05) - (var(--tl-marker-size) / 2));
-}
-
 #timeline .timeline-card__body {
   background: var(--tl-card-content-background-color);
   border-bottom-left-radius: var(--tl-border-radius);
@@ -463,7 +456,7 @@ p {
   padding: var(--tl-card-body-padding);
 }
 
-.timeline-card__body>*:not(:last-child) {
+#timeline .timeline-card__body>*:not(:last-child) {
   margin-bottom: var(--tl-card-item-spacing);
 }
 
@@ -474,30 +467,20 @@ p {
   font-weight: var(--tl-text-font-weight);
 }
 
-/* #timeline .timeline-card__body img {
-  display: block;
-  width: 100%;
-} */
-
 @media (max-width: 991px) {
-  #timeline .timeline-track {
-    max-width: 600px;
+  #timeline {
+    --tl-track-width: 100%;
+    --tl-card-offset: 24px;
+    --tl-card-gap: 6vw;
+    --tl-heading-text-size: 1rem;
+    --tl-heading-padding: 12px 0 12px 12px;
+    --tl-card-body-padding: 16px;
+    --tl-card-item-spacing: 12px;
+    --tl-text-size: 100%;
   }
 
-  #timeline .timeline-track::before {
-    left: 20px;
-  }
-
-  #timeline .timeline-card:nth-child(odd),
-  #timeline .timeline-card:nth-child(even) {
-    width: calc(100% - 45px);
-    left: 45px;
-  }
-
-  #timeline .timeline-card:nth-child(odd) .timeline-card__head::before,
-  #timeline .timeline-card:nth-child(even) .timeline-card__head::before {
-    left: -33px;
-    right: auto;
+  #timeline .timeline-card__subtitle {
+    font-size: 0.8rem;
   }
 }
 
@@ -505,62 +488,18 @@ p {
   #timeline {
     padding: 60px 15px;
   }
-
-  #timeline .timeline-card__title {
-    font-size: 1rem;
-  }
 }
 
 @media (min-width: 2000px) {
   #timeline {
-
-    /* rounded corners */
     --tl-border-radius: 4.5px;
-
-    /* Timeline-Line */
-    --tl-line-width: 1px;
-    --tl-marker-size: 0.5vw;
-
-    /* Layout */
-    --tl-card-width: 45.72%;
-    --tl-card-gap: 4.2vw;
-
-    /* Card – Header */
-    --tl-heading-padding: .5vw 0 .5vw .5vw;
-    --tl-heading-text-size: .8vw;
-
-    /* Card – Body */
-    --tl-card-body-padding: 2vw;
-    --tl-card-item-spacing: 1vw;
+    --tl-card-gap: 1.5vw;
+    --tl-card-offset: 2vw;
+    --tl-heading-padding: 0.5vw 0 0.5vw 0.5vw;
+    --tl-heading-text-size: 0.8vw;
     --tl-text-size: 0.6vw;
   }
-
 }
-
-#timeline.grid-layout .timeline-track {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: var(--tl-card-gap);
-  row-gap: 3vw;
-  max-width: 100%;
-}
-#timeline.grid-layout .timeline-track::before {
-  display: none;
-}
-
-#timeline.grid-layout .timeline-card,
-#timeline.grid-layout .timeline-card:nth-child(odd),
-#timeline.grid-layout .timeline-card:nth-child(even) {
-  width: 100%;
-  left: 0 !important;
-  position: relative;
-}
-
-#timeline.grid-layout .timeline-card__head::before {
-  display: none;
-}
-
-
 
 /* !!--------------------------------------Media Queries---------------------------------------!! */
 
