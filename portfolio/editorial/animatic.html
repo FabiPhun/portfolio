@@ -7,6 +7,40 @@
    <title>Portfolio</title>
    <link rel="stylesheet" href="styles/styles.css" />
    <link rel="stylesheet" href="styles/customisation.css" />
+   <style>
+      .open-timeline {
+         position: relative;
+         user-select: none;
+         cursor: pointer;
+         transition: color 0.2s ease;
+      }
+
+      .open-timeline.is-open {
+         color: var(--accent-color, #4a90e2);
+      }
+
+      .open-timeline::after {
+         content: "▼";
+         display: inline-block;
+         margin-left: 6px;
+         transition: transform 0.3s ease;
+      }
+
+      .open-timeline.is-open::after {
+         transform: rotate(180deg);
+      }
+
+      .timeline-section {
+         display: none;
+         height: 0px;
+         overflow: hidden;
+         transition: height 0.35s ease;
+      }
+
+      .timeline-section.is-open {
+         overflow: visible;
+      }
+   </style>
 </head>
 
 <body data-spa-mode="true">
@@ -14,14 +48,36 @@
 
    <div class="body_content">
 
-
+      <!-- TITLE -->
       <div class="body_item_wrapper">
-
          <div class="body_item">
             <div class="gallery_section_wrapper">
-               <h2>Saving Christmas (2024)</h2>
+               <h2>William Aftons' Sins' (2018 - 2023)</h2>
             </div>
          </div>
+
+         <div class="body_item">
+            <div class="project_item" style="background: none;">
+               <div class="project_text_item project-descripton">
+                  <div class="project_paragraph description_paragraph">
+                     <p class="project_subtitle">
+                        <em>All rights go to ©ScottCawthon and ©FabianF.</em>
+                     </p>
+                     <p>
+                        This used to be a project I was working on at the time, a Five Nights' at Freddys' inspired
+                        short film. The original idea was to have it be 5 to 8 minutes in length, showing off high
+                        quality 3D animation. However, this was way too ambitious for one person and therefore I put it
+                        on hold for the time being. The Animatic shown is a collection of different scenes from the
+                        script.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+      <!-- Video -->
+      <div class="body_item_wrapper">
 
          <div class="body_item">
             <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
@@ -30,21 +86,134 @@
             </video>
          </div>
       </div>
-
+      <!-- Timeline -->
       <div class="body_item_wrapper">
+         <div class="body_item">
+            <h2 class="open-timeline" style="font-size: 14px;">Development Timeline</h2>
+            <div class="timeline-section">
+               <section id="timeline">
+                  <div class="timeline-track">
+
+                     <article class="timeline-card">
+
+                        <header class="timeline-card__head">
+                           <h2 class="timeline-card__title">Script</h2>
+                        </header>
+
+                        <div class="timeline-card__body">
+                           <p>The design of the main character "Fredbear" was tweaked long before any idea for a script
+                              was
+                              even conceived.</p>
+
+                           <p>However, I eventually wrote an outline of the overall story structure to create a usable
+                              script.</p>
+
+                           <div>
+                              <img style="width: 100%; height:auto;" src="/videos/thumbnail_christmas_rough.jpeg"
+                                 alt="">
+                           </div>
+
+                           <p>Above is a snippet of the script depicting one scene from the animatics shown.</p>
+
+                        </div>
+
+                     </article>
+
+                     <article class="timeline-card">
+                        <header class="timeline-card__head">
+                           <h2 class="timeline-card__title">Storyboarding</h2>
+                        </header>
+
+                        <div class="timeline-card__body">
+                           <p>Here are some of the first boards created for the film.
+                           </p>
+                           <p>While creating storyboards, it was clear that we needed additional art for important
+                              moments
+                              that we named "Hero Boards".
+                           </p>
+
+                           <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
+                              loop>
+                              <source src="/videos/thumbnail_christmas.mp4" type="video/mp4">
+                              Your browser does not support HTML video.
+                           </video>
+
+                        </div>
+                     </article>
+
+                     <article class="timeline-card">
+                        <header class="timeline-card__head">
+                           <h2 class="timeline-card__title">Animatic and Audio</h2>
+                        </header>
+
+                        <div class="timeline-card__body">
+                           <p>Animatic work was done in ToonBoom Storyboard Pro and sound was added using Adobe Premiere
+                              Pro.
+                           </p>
+
+                           <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
+                              loop>
+                              <source src="/videos/thumbnail_christmas.mp4" type="video/mp4">
+                              Your browser does not support HTML video.
+                           </video>
+
+                           <p>For the music, it was a blend between me composing a leitmotif and the recording and
+                              mixing
+                              done by a music artist.
+                              Here are some demos I made for the artist to work with.
+                           </p>
+
+                           <p>Amy<br><br>
+                              <audio style="width: 100%;" controls controlslist="nodownload noplaybackrate"
+                                 src="/audio/amy.mp3"></audio>
+                           </p>
+
+                           <p>William<br><br>
+                              <audio style="width: 100%;" controls controlslist="nodownload noplaybackrate"
+                                 src="/audio/william.mp3"></audio>
+                              <audio style="width: 100%;" controls controlslist="nodownload noplaybackrate"
+                                 src="/audio/william_2.mp3"></audio>
+                           </p>
+
+                        </div>
+                     </article>
+
+                  </div>
+               </section>
+            </div>
+
+         </div>
+      </div>
+
+      <!-------------------------------------------- Divider --------------------------------------------->
+      <div class="body_item_wrapper">
+         <div class="body_item">
+
+            <div class="divider"></div>
+         </div>
+      </div>
+      <!-------------------------------------------- Divider --------------------------------------------->
+
+      <!-- TITLE -->
+      <div class="body_item_wrapper">
+         <div class="body_item">
+            <div class="gallery_section_wrapper">
+               <h2>Saving Christmas (2024)</h2>
+            </div>
+         </div>
 
          <div class="body_item">
             <div class="project_item" style="background: none;">
                <div class="project_text_item project-descripton">
-                  <div class="project_paragraph descripton_paragraph">
+                  <div class="project_paragraph description_paragraph">
                      <p class="project_subtitle">
                         <em>All rights go to ©FabianF.</em>
                      </p>
                      <p>
-                        When I studying character animation, I was in the class with someone from Ukraine, we became
-                        friends. However as the war in Ukraine continues to this day, she was unable to visit any
-                        Christmas markets at the time. As this was her favourite activity around Christmas, so I decided
-                        to create a animatic in order to cheer her up.
+                        A friend of mine is from Ukraine; however, as the war in Ukraine continues to this day, she has
+                        not been able to visit any
+                        Christmas markets ever since. As this is her favorite activity around Christmas, I decided
+                        to create an animatic in order to cheer her up.
                      </p>
                   </div>
                </div>
@@ -52,60 +221,83 @@
          </div>
 
       </div>
-
+      <!-- Video -->
       <div class="body_item_wrapper">
          <div class="body_item">
-            <section id="timeline">
-               <div class="timeline-track">
+            <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
+               <source src="videos/christmas_animatic.mp4" type="video/mp4">
+               Your browser does not support HTML video.
+            </video>
+         </div>
+      </div>
+      <!-- Timeline -->
+      <div class="body_item_wrapper">
+         <div class="body_item">
+            <h2 class="open-timeline" style="font-size: 14px;">Development Timeline</h2>
+            <div class="timeline-section">
+               <section id="timeline">
+                  <div class="timeline-track">
 
-                  <article class="timeline-card">
+                     <article class="timeline-card">
 
-                     <header class="timeline-card__head">
-                        <h2 class="timeline-card__title">Thumbnail Board</h2>
-                     </header>
+                        <header class="timeline-card__head">
+                           <h2 class="timeline-card__title">Thumbnail Board</h2>
+                        </header>
 
-                     <div class="timeline-card__body">
-                        <p>I'd start with a script, however - this time around I just jumped in with a basic idea in
-                           mind and went right to thumbnailing the whole animatic</p>
+                        <div class="timeline-card__body">
+                           <p>This time there was no script; I just jumped in with a basic idea in
+                              mind and went right to thumbnailing the whole animatic.</p>
 
-                        <div>
-                           <img style="width: 100%; height:auto;" src="/images/character_design/huh.png" alt="">
+                           <p>At the time I always joked that a giant robot version of myself would show up at her place
+                              to pick her up and lead her to a Christmas market, hence the idea for this animatic.</p>
+
+                           <div>
+                              <img style="width: 100%; height:auto;" src="/videos/thumbnail_christmas_rough.jpeg"
+                                 alt="">
+                           </div>
+
+                           <p>As shown above, I am starting to lay out some of the actions and shots I was imagining.
+                           </p>
+
                         </div>
-                     </div>
 
-                  </article>
+                     </article>
 
-                  <article class="timeline-card">
+                     <article class="timeline-card">
 
-                     <header class="timeline-card__head">
-                        <h2 class="timeline-card__title">Thumbnail Board</h2>
-                     </header>
+                        <header class="timeline-card__head">
+                           <h2 class="timeline-card__title">Rough Cut</h2>
+                        </header>
 
-                     <div class="timeline-card__body">
-                        <p>To get a better feel, I cut together a rough version with the thumbnails board.
-                           Additionaly, music and sound was equaly as important for this project, therefore those were added simultaneously.
-                        </p>
+                        <div class="timeline-card__body">
+                           <p>To get a better feel for the flow, I used the thumbnails to create a rough cut.
+                              Additionally, music and sound were equally as important.
+                           </p>
 
-                        <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
-                           loop>
-                           <source src="videos/board_fnaf_trimmed.mov" type="video/mp4">
-                           Your browser does not support HTML video.
-                        </video>
+                           <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
+                              loop>
+                              <source src="/videos/thumbnail_christmas.mp4" type="video/mp4">
+                              Your browser does not support HTML video.
+                           </video>
 
-                        <div>
-                           <img style="width: 100%; height:auto;" src="/images/character_design/huh.png" alt="">
+                           <p>You will notice that the ending of the animatic still represents the thumbnail cut. This
+                              was
+                              due to scheduling issues on my part, as my mother was suffering from cancer at that time.
+                              However, my friend was still quite enthused to see the animatic.
+                           </p>
+
                         </div>
-                     </div>
 
-                  </article>
+                     </article>
 
-
-
-               </div>
-            </section>
+                  </div>
+               </section>
+            </div>
 
          </div>
       </div>
+
+      <!-------------------------------------------- Divider --------------------------------------------->
 
       <div class="body_item_wrapper">
          <div class="body_item">
@@ -113,7 +305,9 @@
             <div class="divider"></div>
          </div>
       </div>
+      <!-------------------------------------------- Divider --------------------------------------------->
 
+   </div>
 </body>
 
 </html>
