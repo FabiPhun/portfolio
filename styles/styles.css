@@ -277,6 +277,208 @@ p {
   top: -10px;
 }
 
+/* Timeline Template --------------------------------------------------------------------  */
+
+#timeline,
+#timeline * {
+  box-sizing: border-box;
+}
+
+#timeline {
+  /* rounded corners */
+  --tl-border-radius: 2.5px;
+
+  /* Timeline-Line */
+  --tl-line-color: #474c81;
+  --tl-line-width: 1px;
+  --tl-marker-size: 0.5vw;
+
+  /* Layout */
+  --tl-card-width: 22vw;
+  --tl-card-gap: 4vw;
+
+  /* Card – Header */
+  --tl-heading-padding: 1vw 0 1vw 1vw;
+  --tl-heading-text-font: abeezee;
+  --tl-heading-text-font-weight: bold;
+  --tl-heading-text-size: 1.2vw;
+  --tl-heading-text-color: #ffffff;
+
+  /* Card – Body */
+  --tl-text-padding: 1vw;
+  --tl-text-font: quicksand;
+  --tl-text-font-weight: 600;
+  --tl-text-size: 0.8vw;
+  --tl-text-color: rgb(201, 200, 200);
+  --tl-card-content-background-color: #212435;
+
+  --tl-color-1: #4e2a2a;
+  --tl-color-2: #725c34;
+  --tl-color-3: #2a4e4c;
+  --tl-color-4: #472a4e;
+}
+
+#timeline .timeline-heading {
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+#timeline .timeline-leader {
+  color: var(--tl-text-color);
+  max-width: 90%;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+#timeline .timeline-track {
+  position: relative;
+  max-width: calc(var(--tl-card-width) * 2 + var(--tl-card-gap));
+  margin: 0 auto;
+}
+
+#timeline .timeline-track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--tl-line-width);
+  background: var(--tl-line-color);
+}
+
+#timeline .timeline-card {
+  position: relative;
+  width: var(--tl-card-width);
+}
+
+#timeline .timeline-card:nth-child(odd) {
+  left: 0;
+}
+
+#timeline .timeline-card:nth-child(even) {
+  left: calc(var(--tl-card-width) + var(--tl-card-gap));
+}
+
+#timeline .timeline-card__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: var(--tl-border-radius);
+  border-top-right-radius: var(--tl-border-radius);
+}
+
+#timeline .timeline-card:nth-child(4n + 1) .timeline-card__head {
+  background: var(--tl-color-1);
+}
+
+#timeline .timeline-card:nth-child(4n + 2) .timeline-card__head {
+  background: var(--tl-color-2);
+}
+
+#timeline .timeline-card:nth-child(4n + 3) .timeline-card__head {
+  background: var(--tl-color-3);
+}
+
+#timeline .timeline-card:nth-child(4n + 4) .timeline-card__head {
+  background: var(--tl-color-4);
+}
+
+#timeline .timeline-card__title {
+  margin: 0;
+  color: var(--tl-heading-text-color);
+  font-size: var(--tl-heading-text-size);
+  font-family: var(--tl-heading-text-font);
+  font-weight: var(--tl-heading-text-font-weight);
+  padding: var(--tl-heading-padding);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+#timeline .timeline-card__subtitle {
+  display: block;
+  font-size: 0.8vw;
+}
+
+#timeline .timeline-card__head::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  width: var(--tl-marker-size);
+  height: var(--tl-marker-size);
+  background: var(--tl-line-color);
+  border-radius: 50%;
+}
+
+#timeline .timeline-card:nth-child(odd) .timeline-card__head::before {
+  right: calc(-1 * (var(--tl-card-gap) / 1.95) - (var(--tl-marker-size) / 2));
+}
+
+#timeline .timeline-card:nth-child(even) .timeline-card__head::before {
+  left: calc(-1 * (var(--tl-card-gap) / 2.05) - (var(--tl-marker-size) / 2));
+}
+
+#timeline .timeline-card__body {
+  background: var(--tl-card-content-background-color);
+  border-bottom-left-radius: var(--tl-border-radius);
+  border-bottom-right-radius: var(--tl-border-radius);
+  padding: var(--tl-text-padding);
+}
+
+#timeline .timeline-card__body p {
+  color: var(--tl-text-color);
+  font-size: var(--tl-text-size);
+  font-family: var(--tl-text-font);
+  font-weight: var(--tl-text-font-weight);
+}
+
+#timeline .timeline-card__body img {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  #timeline .timeline-track {
+    max-width: 600px;
+  }
+
+  #timeline .timeline-track::before {
+    left: 20px;
+  }
+
+  #timeline .timeline-card:nth-child(odd),
+  #timeline .timeline-card:nth-child(even) {
+    width: calc(100% - 45px);
+    left: 45px;
+  }
+
+  #timeline .timeline-card:nth-child(odd) .timeline-card__head::before,
+  #timeline .timeline-card:nth-child(even) .timeline-card__head::before {
+    left: -33px;
+    right: auto;
+  }
+}
+
+@media (max-width: 479px) {
+  #timeline {
+    padding: 60px 15px;
+  }
+
+  #timeline .timeline-card__title {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 2000px) {
+  #timeline {
+    --tl-card-width: 20vw;
+    --tl-card-gap: 2.2vw;
+  }
+
+  #timeline .timeline-card__subtitle {
+    font-size: 0.6vw;
+  }
+}
+
 /* !!--------------------------------------Media Queries---------------------------------------!! */
 
 /* --- body_content --- */
