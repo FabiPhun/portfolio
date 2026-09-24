@@ -131,6 +131,7 @@ h4 {
 
 /* CUSTOM --------------------------------------------------------------------  */
 
+
 /* Cards --------------------------------------------------------------------  */
 
 .card-container {
@@ -153,7 +154,6 @@ h4 {
 .card-image-item {
   position: relative;
   aspect-ratio: 16/9;
-  cursor: pointer;
   align-items: center;
   justify-content: center;
   align-self: center;

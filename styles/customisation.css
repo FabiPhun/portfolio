@@ -8,50 +8,73 @@
 
 /* ===================== Logo-Card ===================== */
 
-.signature-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 50%;
-}
+ .profile_card {
+    --photo_size: 260px;       /* circle diameter = height of the gray box (adjust to taste) */
+    display: flex;
+    flex-direction: row;       /* desktop: photo | text holder */
+    align-items: stretch;      /* gray box stretches to the circle's height */
+    gap: 24px;
+  }
 
-.profile-image {
-  background-image: url(/images/other/character.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  width: 220px;
-  flex-shrink: 0;
-}
+  /* Left: circular profile picture */
+  .profile_card_photo {
+    flex: 0 0 auto;
+    align-self: flex-start;    /* keeps it a perfect circle */
+    width: var(--photo_size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+/* 
+  #profile_header{
+    font-size: 2px;
+  } */
 
-#signature-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  .profile_card_photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.signature-image {
-  background-image: url(/images/unterschrift.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 80%;
-  aspect-ratio: 2 / 1;
-  margin-bottom: 5%;
-}
+  .profile_card_info {
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+    /* background: #d9d9d9; */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+  }
 
+  .profile_card_logo {
+    display: block;
+    margin: 0 auto 0 16px;
+    height: auto;
+    width: auto;
+  }
 
-/* .signature-paragraph {} */
+  /* Email link: inherits everything, only the pointer cursor */
+  .profile_card_info a {
+    cursor: pointer;
+  }
 
-#signature-title {
-  font-size: 20px;
-}
+  /* Mobile / tablet: photo on top, text holder below */
+  @media (max-width: 991px) {
+    .profile_card {
+      --photo_size: 220px;
+      flex-direction: column;
+      align-items: stretch;
+    }
 
-#signature-tagline {
-  font-family: quicksand;
-  font-size: 14px;
-}
+    .profile_card_photo {
+      align-self: center;
+      max-width: 100%;
+    }
+  }
 
 /* ===================== Divider-Variants ===================== */
 
@@ -124,6 +147,34 @@
   color: #f86885;
 }
 
+/* ===================== Animation-Panel ===================== */
+
+
+#animation-panel {
+  background-image: url(/videos/animation/hand.png);
+  background-position: 35% 65%;
+  background-size: 100%;
+  background-blend-mode: multiply;
+  transition: 0.8s;
+  border-radius: .4vw;
+}
+
+#animation-panel:hover {
+  background-size: 110%;
+}
+
+#animation-title {
+  background: #ffffff;
+  background: linear-gradient(to right, #0d6eff 1%, #f1f1f1 45%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#animation-tagline {
+  color: #f86885;
+}
+
+
 /* ===================== Storyboard-Gallery ===================== */
 
 #gallery-two-column {
@@ -134,56 +185,13 @@
   #gallery-two-column {
     grid-template-columns: repeat(1, 1fr);
   }
-}
-
-/* ===================== Animation-Panel ===================== */
-
-#category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding-bottom: .7vw;
-  border-radius: .4vw;
-}
-
-#grid-title {
-  font-size: 1vw;
-  text-align: center;
-}
-
-.grid-panel {
-  justify-content: center;
-  align-items: center;
-  padding: 20%;
-}
-
-#animation-panel {
-  background-image: url(/images/animation/sonic.png);
-  background-blend-mode: darken;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 0% 50%;
-}
-
-@media screen and (max-width: 991px) {
-  #category-grid {
-    grid-template-columns: repeat(1, 1fr);
-    row-gap: 0;
-    padding-bottom: 0;
+  #animation-panel{
+    background-position: 75% 55%;
+    background-size: 200%;
   }
-
-  .grid-panel {
-    padding: 5%;
-  }
-
-  #grid-title {
-    font-size: 200%;
-    padding: 0%;
-  }
-
-  #animation-panel {
-    background-size: 100%;
-  }
+  #animation-panel:hover {
+  background-size: 210%;
+}
 }
 
 /* ===================== Description-Item ===================== */
