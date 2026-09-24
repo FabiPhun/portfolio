@@ -25,10 +25,6 @@
     border-radius: 50%;
     overflow: hidden;
   }
-/* 
-  #profile_header{
-    font-size: 2px;
-  } */
 
   .profile_card_photo img {
     display: block;
@@ -37,6 +33,7 @@
     object-fit: cover;
   }
 
+  /* Right: gray box with image, title and email */
   .profile_card_info {
     flex: 1 1 auto;
     min-width: 0;
@@ -45,14 +42,16 @@
     padding: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    justify-content: left;   /* content stays centered if the box is taller than it */
     align-items: left;
     text-align: left;
   }
 
   .profile_card_logo {
     display: block;
-    margin: 0 auto 0 16px;
+    margin: 0 auto 0 0;
+    max-width: 100%;
+    max-height: 120px;         /* keeps the image from pushing the box taller than the circle */
     height: auto;
     width: auto;
   }
