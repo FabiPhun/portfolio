@@ -13,6 +13,8 @@
         'about': '/aboutme.html',
         'resume': '/resume.html',
         'ed-animatic': '/portfolio/editorial/animatic.html',
+        'ed-freelance': '/portfolio/editorial/freelance.html',
+        'ed-motion-graphics': '/portfolio/editorial/motion-graphics.html',
         'gd-smmk': '/portfolio/graphical-design/gd_smmk.html',
         'gd-odd-print': '/portfolio/graphical-design/gd_odd_print.html',
         'gd-miscellaneous': '/portfolio/graphical-design/gd_miscellaneous.html',
