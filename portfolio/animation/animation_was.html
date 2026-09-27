@@ -1,26 +1,295 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio gallery template</title>
-    
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <div class="body_content" id="page-content">
-        <div
-            class="gallery_wrapper"
-            image-spacing="5px"
-            maxImages="4"
-            folder-path=""
-            images=""
-            fc-gallery="list"
-            row-stretch="1">
-        </div>
-    </div>
 
-    <!-- components -->
-    <script src="../../components/gallery_component.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/customisation.css" />
+</head>
+
+<body data-spa-mode="true">
+    <div id="navbar-container" data-directory-fix="/"></div>
+
+    <div class="body_content">
+
+        <!-- TITLE -->
+        <div class="body_item_wrapper">
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h2>William Aftons' Sins' (2018 - 2024)</h2>
+                </div>
+            </div>
+
+            <div class="body_item">
+                <div class="project_item" style="background: none;">
+                    <div class="project_text_item project-descripton">
+                        <div class="project_paragraph description_paragraph">
+                            <p class="project_subtitle">
+                                <em>All rights go to ©ScottCawthon and ©FabianF.</em>
+                            </p>
+                            <p>
+                                "William Aftons' Sins" was a project I was working on at the time, a Five Nights' at
+                                Freddys'
+                                inspired
+                                short film planned to be 5 to 8 minutes in length, showing off how Scott Cawthons' style
+                                of Animation can also work in motion. However, this was way too ambitious for one person
+                                as it included all parts of the animation pipeline. So, it was put on ice.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-------------------------------------------- Divider --------------------------------------------->
+        <div class="body_item_wrapper">
+            <div class="body_item">
+
+                <div class="divider"></div>
+            </div>
+        </div>
+        <!-------------------------------------------- Divider --------------------------------------------->
+
+        <!-- Video -->
+        <div class="body_item_wrapper">
+
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h2>Animation Testing</h2>
+                </div>
+            </div>
+
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h4>Animation-test for Pipeline</h4>
+                </div>
+            </div>
+
+            <div class="body_item">
+                <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
+                    <source src="videos/animation/anim_test.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+        </div>
+
+        <!-- Video -->
+
+        <div class="body_item_wrapper">
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h4>Simulation/Rig-test Walkcycle</h4>
+                </div>
+            </div>
+
+            <div class="body_item">
+                <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
+                    <source src="videos/animation/fred_walk.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+
+        <div class="body_item_wrapper">
+            <div class="body_item">
+                <h2 class="open-timeline" style="font-size: 14px;">Development Timeline</h2>
+                <div class="timeline-section">
+                    <section id="timeline" class="timeline--single-column">
+                        <div class="timeline-track">
+
+                            <article class="timeline-card">
+                                <header class="timeline-card__head">
+                                    <h2 class="timeline-card__title">Character Rig</h2>
+                                </header>
+
+                                <div class="timeline-card__body">
+                                    <p>Before any animation could take place, it was important to rig the character,
+                                        as Fredbear is a machine, the rig heavily relied on constraints for pistons
+                                        and mechanichal joints.
+                                    </p>
+                                    
+                                    <div>
+                                        <img style="width: 100%; height:auto;" src="/images/modelling_and_rigging/rigging/fredbear.png"
+                                            alt="">
+                                    </div>
+
+                                                                        <div class="divider"></div>
+
+                                    <p>
+                                    Considering the challanges, the rig was quite straight forward from
+                                        beginning to end. The result was this Rig test:
+                                    </p>
+
+
+                                    <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture
+                                        controls loop>
+                                        <source src="/videos/animation/fred_shake.mp4" type="video/mp4">
+                                        Your browser does not support HTML video.
+                                    </video>
+
+                                    <div class="divider"></div>
+
+                                    <p>During development, the design and mechanics of the hand changed quite
+                                        drastically, which is why a seperate animation test was needed to verify
+                                        functionality.
+                                    </p>
+
+                                    <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture
+                                        controls loop>
+                                        <source src="/videos/animation/fred_fingers.mov" type="video/mp4">
+                                        Your browser does not support HTML video.
+                                    </video>
+
+                                </div>
+                            </article>
+
+                            <article class="timeline-card">
+
+                                <header class="timeline-card__head">
+                                    <h2 class="timeline-card__title">LookDev</h2>
+                                </header>
+
+                                <div class="timeline-card__body">
+                                    <p>
+                                        With rigging done, it was time to work with Hair simulation, as this played
+                                        into
+                                        rigging and surfacing, it was
+                                        important to understand how it would impact the overal pipeline from
+                                        animation to final image.
+                                        <br><br> At first, the simulation work caused many unusual behaviours under
+                                        motion as seen bellow:
+                                    </p>
+
+
+                                    <div>
+                                        <img style="width: 100%; height:auto;" src="/videos/animation/lookdev/head2.png"
+                                            alt="">
+                                    </div>
+
+                                    <div>
+                                        <img style="width: 100%; height:auto;" src="/videos/animation/lookdev/head1.png"
+                                            alt="">
+                                    </div>
+
+                                    <div>
+                                        <img style="width: 100%; height:auto;" src="/videos/animation/lookdev/full2.jpg"
+                                            alt="">
+                                    </div>
+
+                                    <div>
+                                        <img style="width: 100%; height:auto;" src="/videos/animation/lookdev/head3.png"
+                                            alt="">
+                                    </div>
+                                </div>
+
+                            </article>
+
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+
+        <!-------------------------------------------- Divider --------------------------------------------->
+
+        <div class="body_item_wrapper">
+            <div class="body_item">
+
+                <div class="divider"></div>
+            </div>
+        </div>
+        <!-------------------------------------------- Divider --------------------------------------------->
+
+        <!-- Video -->
+
+        <div class="body_item_wrapper">
+
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h2>Office Sequence</h2>
+                </div>
+
+                <div class="body_item">
+                    <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
+                        <source src="/videos/animation/test_final.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+
+        <div class="body_item_wrapper">
+            <div class="body_item">
+                <h2 class="open-timeline" style="font-size: 14px;">Development Timeline</h2>
+                <div class="timeline-section">
+                    <section id="timeline" class="timeline--single-column">
+                        <div class="timeline-track">
+
+                            <article class="timeline-card">
+
+                                <header class="timeline-card__head">
+                                    <h2 class="timeline-card__title">Reference</h2>
+                                </header>
+
+                                <div class="timeline-card__body">
+                                    <p>
+                                        The purpose of this test was to understand how Fredbear should move as this was
+                                        quite a hot topic for me at the time.
+                                        Making Fredbear too mechanical might make the viewer feel as if they are just
+                                        watching a robot move but finding the right belance between mechanical movement
+                                        and human acting choices was tough.
+                                        <br><br> To start, I planed out the rough composition for the shots by using a
+                                        plush and my phone, this was most logical to me at the time as I did not
+                                        have any experience with storyboarding yet.
+                                    </p>
+
+
+                                    <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture
+                                        controls loop>
+                                        <source src="/videos/animation/test_ref.mp4" type="video/mp4">
+                                        Your browser does not support HTML video.
+                                    </video>
+
+                            </article>
+
+                            <article class="timeline-card">
+
+                                <header class="timeline-card__head">
+                                    <h2 class="timeline-card__title">Layout</h2>
+                                </header>
+
+                                <div class="timeline-card__body">
+                                    <p>
+                                        Once I was happy with my reference, I did the layout for the sequence I wanted to animate.
+                                        <br><br>This means, putting the characters in the scene, adding cameras and deciding how long which shot and movement should take.
+                                    </p>
+
+
+                                    <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture
+                                        controls loop>
+                                        <source src="/videos/animation/test_layout.mp4" type="video/mp4">
+                                        Your browser does not support HTML video.
+                                    </video>
+
+                            </article>
+
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
 </html>

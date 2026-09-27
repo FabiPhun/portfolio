@@ -7,40 +7,6 @@
    <title>Portfolio</title>
    <link rel="stylesheet" href="styles/styles.css" />
    <link rel="stylesheet" href="styles/customisation.css" />
-   <style>
-      .open-timeline {
-         position: relative;
-         user-select: none;
-         cursor: pointer;
-         transition: color 0.2s ease;
-      }
-
-      .open-timeline.is-open {
-         color: var(--accent-color, #4a90e2);
-      }
-
-      .open-timeline::after {
-         content: "▼";
-         display: inline-block;
-         margin-left: 6px;
-         transition: transform 0.3s ease;
-      }
-
-      .open-timeline.is-open::after {
-         transform: rotate(180deg);
-      }
-
-      .timeline-section {
-         display: none;
-         height: 0px;
-         overflow: hidden;
-         transition: height 0.35s ease;
-      }
-
-      .timeline-section.is-open {
-         overflow: visible;
-      }
-   </style>
 </head>
 
 <body data-spa-mode="true">
@@ -79,17 +45,33 @@
       <div class="body_item_wrapper">
          <div class="body_item">
             <div class="gallery_section_wrapper">
-               <h4>Sequence 2 - Scene 2/3</h4>
+               <h4>Stage - Sequence 3</h4>
             </div>
          </div>
 
          <div class="body_item">
             <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
-               <source src="videos/animation/fredbear_arm.mov" type="video/mp4">
+               <source src="/videos/storyboard/clip1.mp4" type="video/mp4">
                Your browser does not support HTML video.
             </video>
          </div>
       </div>
+
+      <div class="body_item_wrapper">
+         <div class="body_item">
+            <div class="gallery_section_wrapper">
+               <h4>Stage - Sequence 1/2</h4>
+            </div>
+         </div>
+
+         <div class="body_item">
+            <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls loop>
+               <source src="/videos/storyboard/board_fnaf.mp4" type="video/mp4">
+               Your browser does not support HTML video.
+            </video>
+         </div>
+      </div>
+
       <!-- Timeline -->
       <div class="body_item_wrapper">
          <div class="body_item">
@@ -98,32 +80,6 @@
                <section id="timeline" class="timeline--single-column">
                   <div class="timeline-track">
 
-                     <article class="timeline-card">
-
-                        <header class="timeline-card__head">
-                           <h2 class="timeline-card__title">Script</h2>
-                        </header>
-
-                        <div class="timeline-card__body">
-                           <p>This is the script for Sequence 2:</p>
-
-
-                           <div>
-                              <img style="width: 100%; height:auto;" src="/videos/thumbnail_christmas_rough.jpeg"
-                                 alt="">
-                           </div>
-
-                           <div class="divider"></div>
-
-                           <p>The design of "Fredbear" had been decided long before any idea for a script was even
-                              conceived.
-                              <br>I eventually wrote an outline of the overall story structure to create
-                              usable script.
-                           </p>
-
-                        </div>
-
-                     </article>
 
                      <article class="timeline-card">
                         <header class="timeline-card__head">
@@ -133,36 +89,23 @@
                         <div class="timeline-card__body">
                            <p>Here are some of the first boards created for the film.
                            </p>
-                           <p>While creating storyboards, it was clear that we needed additional art for important
-                              moments
-                              that we named "Hero Boards".
-                           </p>
 
-                           <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
-                              loop>
-                              <source src="/videos/thumbnail_christmas.mp4" type="video/mp4">
-                              Your browser does not support HTML video.
-                           </video>
+                           <div>
+                              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSN47B-iQ-23fFUl66IW_BbK0NkqoEqkbPVJek3aon8g5gX4FQgDlJksP8HkJI2nFWpUrxhEGJBJz69/pubembed?start=true&loop=true&delayms=3000" frameborder="0" width="100%" height="500px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                           </div>
 
                         </div>
                      </article>
 
                      <article class="timeline-card">
                         <header class="timeline-card__head">
-                           <h2 class="timeline-card__title">Animatic and Audio</h2>
+                           <h2 class="timeline-card__title">Music and Audio</h2>
                         </header>
 
                         <div class="timeline-card__body">
                            <p>Animatic work was done in ToonBoom Storyboard Pro and sound was added using Adobe Premiere
                               Pro.
                            </p>
-
-
-                           <video width="100%" controlsList="nodownload noplaybackrate" disablePictureInPicture controls
-                              loop>
-                              <source src="/videos/thumbnail_christmas.mp4" type="video/mp4">
-                              Your browser does not support HTML video.
-                           </video>
 
                            <div class="divider"></div>
 
