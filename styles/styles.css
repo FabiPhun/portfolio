@@ -139,7 +139,6 @@ h4 {
   grid-template-columns: repeat(3, 1fr);
   row-gap: 2vw;
   column-gap: 2vw;
-  cursor: default;
 }
 
 /* All other cards default to span 1 (one column) */
@@ -149,6 +148,7 @@ h4 {
 
 .card-item {
   padding-right: 1.2vw;
+  /* cursor: pointer; */
 }
 
 .card-image-item {

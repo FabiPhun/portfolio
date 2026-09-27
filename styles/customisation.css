@@ -8,18 +8,20 @@
 
 /* ===================== Logo-Card ===================== */
 
+#profile_header{
+  text-align: center;
+}
+
  .profile_card {
-    --photo_size: 260px;       /* circle diameter = height of the gray box (adjust to taste) */
+    --photo_size: 260px;
     display: flex;
-    flex-direction: row;       /* desktop: photo | text holder */
-    align-items: stretch;      /* gray box stretches to the circle's height */
+    flex-direction: column;
+    align-items: stretch;
     gap: 24px;
   }
 
-  /* Left: circular profile picture */
   .profile_card_photo {
-    flex: 0 0 auto;
-    align-self: flex-start;    /* keeps it a perfect circle */
+    align-self: center;
     width: var(--photo_size);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
@@ -33,35 +35,30 @@
     object-fit: cover;
   }
 
-  /* Right: gray box with image, title and email */
   .profile_card_info {
-    flex: 1 1 auto;
     min-width: 0;
     box-sizing: border-box;
-    /* background: #d9d9d9; */
     padding: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: left;   /* content stays centered if the box is taller than it */
-    align-items: left;
-    text-align: left;
+    justify-content: center; 
+    align-items: stretch;
+    text-align: center;
   }
 
   .profile_card_logo {
     display: block;
-    margin: 0 auto 0 0;
+    margin: 0 auto 16px;
     max-width: 100%;
-    max-height: 120px;         /* keeps the image from pushing the box taller than the circle */
+    max-height: 200px;
     height: auto;
     width: auto;
   }
 
-  /* Email link: inherits everything, only the pointer cursor */
   .profile_card_info a {
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 
-  /* Mobile / tablet: photo on top, text holder below */
   @media (max-width: 991px) {
     .profile_card {
       --photo_size: 220px;
@@ -94,6 +91,7 @@
 
 #showcase-info {
   background: none;
+  cursor: default;
 }
 
 /* #showcase-paragraph {
