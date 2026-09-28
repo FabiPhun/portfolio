@@ -1,26 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio gallery template</title>
-    
-    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/customisation.css" />
 </head>
-<body>
-    <div class="body_content" id="page-content">
-        <div
-            class="gallery_wrapper"
-            image-spacing="5px"
-            maxImages="4"
-            folder-path=""
-            images=""
-            fc-gallery="list"
-            row-stretch="1">
+
+<body data-spa-mode="true">
+    <div id="navbar-container" data-directory-fix="/"></div>
+
+    <div class="body_content">
+
+        <!-- TITLE -->
+        <div class="body_item_wrapper">
+            <div class="body_item">
+                <div class="gallery_section_wrapper">
+                    <h2>Schöpperle Flötenuhr</h2>
+                </div>
+            </div>
+
+            <div class="body_item">
+                <div class="project_item" style="background: none;">
+                    <div class="project_text_item project-descripton">
+                        <div class="project_paragraph description_paragraph">
+                            <p class="project_subtitle">
+                                <em>All rights go to ©FabianF and ©SMMK</em>
+                            </p>
+                            <p>
+                                A animation test I did for Siegfrieds' Mechanical Musiccabinet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Video -->
+
+        <div class="body_item_wrapper">
+
+            <div class="body_item">
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTjcJmjcwgYopx3rt9qYk46bDAqBUOKL550ezyl6QwtQiDPWF-gux6CnqQVbsdvNlicD9LeFhqANvLU/pubembed?start=true&loop=true&delayms=3000" frameborder="0" width="auto" height="800px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+        </div>
+
+    <!-------------------------------------------- Divider --------------------------------------------->
+
+    <div class="body_item_wrapper">
+        <div class="body_item">
+
+            <div class="divider"></div>
         </div>
     </div>
+    <!-------------------------------------------- Divider --------------------------------------------->
 
-    <!-- components -->
-    <script src="../../components/gallery_component.js"></script>
-    </body>
+    </div>
+</body>
+
 </html>
